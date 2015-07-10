@@ -24,7 +24,7 @@ Meteor.startup ->
   HttpStatusJob.create JobsCollection, 'ETCD', 'http://docker1.rni.org:4001/v2/keys/'
   HttpStatusJob.create JobsCollection, 'Discourse', 'http://iqtservices.isd.org:8181/'
   HttpStatusJob.create JobsCollection, 'Owncloud', 'http://iqtservices.isd.org:81/owncloud/'
-  HttpStatusJob.create JobsCollection, 'Xls2TestX', 'http://iqtservices.isd.org:4567/'
+  #HttpStatusJob.create JobsCollection, 'Xls2TestX', 'http://iqtservices.isd.org:4567/'
   HttpStatusJob.create JobsCollection, 'Observium', 'http://iqtservices.isd.org:8668/'
   HttpStatusJob.create JobsCollection, 'Logstash', 'http://iqtservices.isd.org:9292/'
 
