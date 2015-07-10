@@ -1,5 +1,11 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    width:100%;
+}
+
 .page-content {
-    padding: 20px;
+    padding: 5px 20px 0 20px;
 }
 
 .dash-tile {
@@ -80,4 +86,24 @@
     margin: 0;
     padding: 0;
     float:right;
+}
+
+.serviceNumberContainers {
+    padding-bottom: 40px;
+}
+.serviceUpDownNumbers {
+    text-align: center;
+}
+.serviceUpDownNumbers.up {
+    color: green;
+}
+.serviceUpDownNumbers.down {
+    color: red;
+}
+.serviceUpDownNumbers.ok {
+    color: lightgrey;
+}
+.serviceUpDownNumber {
+    font-size: 60px;
+    line-height: 90%;
 }

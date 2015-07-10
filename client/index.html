@@ -4,9 +4,25 @@
 
 <body>
     <div class="page-content">
-        {{> index}}
+        {{> header }}
+        {{> index }}
     </div>
 </body>
+
+<template name="header">
+    <div class="container-fluid serviceNumberContainers">
+        <div class="row">
+            <div class="col-md-6 serviceUpDownNumbers {{upNumberClass}}">
+                Up
+                <div class="serviceUpDownNumber">{{upCount}}</div>
+            </div>
+            <div class="col-md-6 serviceUpDownNumbers {{downNumberClass}}">
+                Down
+                <div class="serviceUpDownNumber">{{downCount}}</div>
+            </div>
+        </div>
+    </div>
+</template>
 
 <!-- from http://themeforest.net/item/uadmin-responsive-admin-dashboard-template/full_screen_preview/4399811?ref=lamdang -->
 <template name="index">
