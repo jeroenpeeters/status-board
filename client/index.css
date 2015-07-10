@@ -1,0 +1,83 @@
+.page-content {
+    padding: 20px;
+}
+
+.dash-tile {
+    min-height: 190px;
+    min-width: 250px;
+    width: 24%;
+    float: left;
+    background-color: #e9e9e9;
+    margin: 0 5px 20px;
+    padding: 0 20px;
+    transition: all 2000ms 0ms ease;
+}
+
+.dash-tile-header {
+    margin: 0 -20px;
+    padding: 0 4px 0 7px;
+    min-height: 38px;
+    line-height: 45px;
+    font-weight: 700;
+    border-bottom: 2px solid #f9f9f9;
+    background-color: #eee;
+    opacity: .75;
+}
+
+.dash-tile-options {
+    float: right;
+    height: 38px;
+    line-height: 41px;
+}
+
+.dash-tile-icon {
+    float: left;
+    padding: 40px 0 0;
+    font-size: 48px;
+    text-align: left;
+    line-height: normal;
+    color: white;
+}
+.dash-tile-text {
+    top: 46px;
+    position: relative;
+    font-size: 36px;
+    text-align: right;
+    line-height: normal;
+    color: white;
+}
+.dash-tile-timestamp {
+    float: left;
+    padding: 5px 0 0;
+    font-size: 14px;
+    text-align: left;
+    color: white;
+}
+.dash-tile-status {
+    top: 70px;
+    position: relative;
+    overflow: hidden;
+    height: 15px;
+}
+
+.dash-tile-ocean {
+    background-color: #3991db;
+}
+.dash-tile-leaf {
+    background-color: #c2db39;
+}
+.dash-tile-green {
+    background-color: #5cb85c;
+}
+.dash-tile-red {
+    background-color: #d9534f;
+}
+
+.statusPart {
+    width:5px; 
+    height:15px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    float:right;
+}

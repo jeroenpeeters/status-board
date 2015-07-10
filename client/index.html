@@ -1,0 +1,34 @@
+<head>
+  <title>Status Board</title>
+</head>
+
+<body>
+    <div class="page-content">
+        {{> index}}
+    </div>
+</body>
+
+<!-- from http://themeforest.net/item/uadmin-responsive-admin-dashboard-template/full_screen_preview/4399811?ref=lamdang -->
+<template name="index">
+    {{#each services}}
+    <div class="dash-tiles ">
+        <div class="dash-tile {{statusClass}} clearfix">
+            <div class="dash-tile-header">
+                {{name}}
+            </div>
+            <!--div class="dash-tile-icon"><i class="fa fa-users"></i></div-->
+            {{!--
+            <div class="dash-tile-timestamp">checked: {{lastCheckHuman}}</div>
+            --}}
+            <div class="dash-tile-text">
+                {{statusText}}
+            </div>
+            <div class="dash-tile-status">
+                {{#each serviceStatus}}
+                    <span class="statusPart" style="background-color:{{statusColor}};border-bottom:2px solid {{borderStatusColor}};border-top:2px solid {{borderStatusColor}};">&nbsp;</span>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</template>
