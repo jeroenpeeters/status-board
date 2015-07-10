@@ -24,12 +24,11 @@ Meteor.startup ->
   HttpStatusJob.create JobsCollection, 'ETCD', 'http://docker1.rni.org:4001/v2/keys/'
   HttpStatusJob.create JobsCollection, 'Discourse', 'http://iqtservices.isd.org:8181/'
   HttpStatusJob.create JobsCollection, 'Owncloud', 'http://iqtservices.isd.org:81/owncloud/'
-  HttpStatusJob.create JobsCollection, 'Always Down', 'http://down.rni.org:4001/v2/keys/'
 
-  SshJob.create JobsCollection, 'Node21', '10.19.88.21', 'core', '~/.ssh/docker-cluster_id', 'ls'
-  SshJob.create JobsCollection, 'Node22', '10.19.88.22', 'core', '~/.ssh/docker-cluster_id', 'ls'
-  SshJob.create JobsCollection, 'Node23', '10.19.88.23', 'core', '~/.ssh/docker-cluster_id', 'ls'
-  SshJob.create JobsCollection, 'Node24', '10.19.88.24', 'core', '~/.ssh/docker-cluster_id', 'ls'
+  SshJob.create JobsCollection, 'Node21', '10.19.88.21', 'core', '~/.ssh/id_rsa', 'ls'
+  SshJob.create JobsCollection, 'Node22', '10.19.88.22', 'core', '~/.ssh/id_rsa', 'ls'
+  SshJob.create JobsCollection, 'Node23', '10.19.88.23', 'core', '~/.ssh/id_rsa', 'ls'
+  SshJob.create JobsCollection, 'Node24', '10.19.88.24', 'core', '~/.ssh/id_rsa', 'ls'
 
 
   HttpStatusJob.process JobsCollection
