@@ -13,7 +13,7 @@
                   "version": "1.0.1"
                 },
                 "isarray": {
-                  "version": "http://www.nexus.kiesraad.ictu:8081/content/repositories/npm/isarray/-/isarray-0.0.1.tgz"
+                  "version": "0.0.1"
                 },
                 "string_decoder": {
                   "version": "0.10.31"
