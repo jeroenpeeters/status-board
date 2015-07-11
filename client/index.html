@@ -2,13 +2,6 @@
   <title>Status Board</title>
 </head>
 
-<body>
-    <div class="page-content">
-        {{> header }}
-        {{> index }}
-    </div>
-</body>
-
 <template name="header">
     <div class="container-fluid serviceNumberContainers">
         <div class="row">
@@ -26,6 +19,7 @@
 
 <!-- from http://themeforest.net/item/uadmin-responsive-admin-dashboard-template/full_screen_preview/4399811?ref=lamdang -->
 <template name="index">
+    {{> header }}
     {{#each services}}
     <div class="dash-tiles ">
         <div class="dash-tile {{statusClass}} clearfix">

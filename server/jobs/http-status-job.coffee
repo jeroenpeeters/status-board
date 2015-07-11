@@ -13,12 +13,10 @@
 
   process: (collection) ->
     collection.processJobs 'httpStatusJob', (job, callback) ->
-      console.log 'job running'
+      console.log 'job running', job
       HTTP.get job.data.url, timeout: 2500, (err, data) ->
         if err or not data
-          FailJob job.data
-          job.fail err.content
+          FailJob job
         else
-          SucceedJob job.data
-          job.done()
+          CompleteJob job
       callback()

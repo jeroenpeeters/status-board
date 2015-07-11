@@ -16,6 +16,3 @@ Template.header.helpers
     if Services.find({isUp: true}).count() then 'up' else 'ok'
   downNumberClass: ->
     if Services.find({isUp: false}).count() then 'down' else 'ok'
-
-Template.index.onCreated ->
-  Meteor.subscribe 'services'

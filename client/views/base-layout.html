@@ -1,0 +1,25 @@
+<template name="base-layout">
+    {{> navbar }}
+    <div class="page-content">
+        {{> yield }}
+    </div>
+</template>
+
+<template name="navbar">
+    <div id="top-nav" class="navbar navbar-default navbar-static-top">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="{{isActiveRoute 'index'}}"><a href="{{pathFor 'index'}}">Dashboard</a></li>
+                    <li class="{{isActiveRoute regex='new-.+-service'}} dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New service <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="{{isActiveRoute 'new-http-service'}}"><a href="{{pathFor 'new-http-service'}}">HTTP Service</a></li>
+                            <li class="{{isActiveRoute 'new-ssh-service'}}"><a href="{{pathFor 'new-ssh-service'}}">SSH Service</a></li>
+                            <!-- li role="separator" class="divider"></li-->
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+    </div>
+
+</template>
