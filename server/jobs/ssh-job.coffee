@@ -1,13 +1,10 @@
 ssh2 = Meteor.npmRequire 'ssh2-connect'
 
 @SshJob =
-  create: (collection, name, server, username, privateKeyPath, cmd) ->
+  create: (collection, name, serviceDetails) ->
+    console.log 'create new Ssh Job', name, serviceDetails
     job = new Job collection, 'sshJob',
-      name: name
-      server: server
-      username: username
-      privateKeyPath: privateKeyPath
-      cmd: cmd
+      _.extend({ name: name }, serviceDetails)
     job.repeat
       repeats: collection.forever
       wait: 1000 * 60
@@ -17,12 +14,13 @@ ssh2 = Meteor.npmRequire 'ssh2-connect'
 
   process: (collection) ->
     collection.processJobs 'sshJob', (job, callback) ->
-      ssh2 host: job.data.server, username: job.data.username, privateKeyPath: job.data.privateKeyPath, readyTimeout:2500, Meteor.bindEnvironment (err, session) ->
+      serviceDetails = _.extend {readyTimeout:2500}, job.data
+      ssh2 serviceDetails, Meteor.bindEnvironment (err, session) ->
         if err
           FailJob job
           callback()
         else
-          session.exec job.data.cmd, Meteor.bindEnvironment (err, result) ->
+          session.exec serviceDetails.cmd, Meteor.bindEnvironment (err, result) ->
             if err
               FailJob job
             else
