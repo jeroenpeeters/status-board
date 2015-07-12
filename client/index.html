@@ -34,11 +34,15 @@
                 {{statusText}}
             </div>
             <div class="dash-tile-status">
-                {{#each serviceStatus}}
-                    <div class="statusPart" style="background-color:{{statusColor}};border-bottom:2px solid {{borderStatusColor}};border-top:2px solid {{borderStatusColor}};" data-tooltip="{{dateFromNow}}" data-tooltip-direction="s"></div>
-                {{/each}}
+                {{> simpleServiceStatusGraph }}
             </div>
         </div>
     </div>
+    {{/each}}
+</template>
+
+<template name="simpleServiceStatusGraph">
+    {{#each serviceStatus}}
+        <div class="statusPart" style="background-color:{{statusColor}};border-bottom:2px solid {{borderStatusColor}};border-top:2px solid {{borderStatusColor}};" data-tooltip="{{dateFromNow}}" data-tooltip-direction="s"></div>
     {{/each}}
 </template>
