@@ -25,9 +25,8 @@
 
 Meteor.startup ->
 
-  JobsCollection.remove {}
-
-  ConfigureJobs JobsCollection
+  #JobsCollection.remove {}
+  #ConfigureJobs JobsCollection
 
   HttpStatusJob.process JobsCollection
   SshJob.process JobsCollection
