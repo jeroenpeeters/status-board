@@ -4,6 +4,7 @@ Template.index.helpers
     Meteor.subscribe 'service/status', {name: @name}
     ServiceStatus.find {name: @name}, sort: date: -1
   lastCheckHuman: -> moment(@lastCheck).fromNow()
+  dateFromNow: -> moment(@date).fromNow()
   statusClass: -> if @isUp then 'dash-tile-green' else 'dash-tile-red'
   statusText: -> if @isUp then 'Up' else 'Down'
   statusColor: -> if @isUp then '#2ECC40' else '#FF4136'
