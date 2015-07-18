@@ -4,6 +4,10 @@ html, body {
     width:100%;
 }
 
+.navbar-right {
+    margin-right: 0 !important;
+}
+
 .page-content {
     padding: 5px 20px 0 20px;
 }
@@ -88,11 +92,14 @@ html, body {
     float:right;
 }
 
-.serviceNumberContainers {
-    padding-bottom: 40px;
-}
+
 .serviceUpDownNumbers {
     text-align: center;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
 }
 .serviceUpDownNumbers.up {
     color: green;
@@ -104,6 +111,5 @@ html, body {
     color: lightgrey;
 }
 .serviceUpDownNumber {
-    font-size: 60px;
-    line-height: 90%;
+    font-size: 30px;
 }

@@ -5,12 +5,7 @@ Template.index.helpers
   statusText: -> if @isUp then 'Up' else 'Down'
 
 Template.header.helpers
-  upCount: -> Services.find({isUp: true}).count()
-  downCount: -> Services.find({isUp: false}).count()
-  upNumberClass: ->
-    if Services.find({isUp: true}).count() then 'up' else 'ok'
-  downNumberClass: ->
-    if Services.find({isUp: false}).count() then 'down' else 'ok'
+
 
 Template.simpleServiceStatusGraph.helpers
   statusColor: -> if @isUp then '#2ECC40' else '#FF4136'
