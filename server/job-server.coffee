@@ -3,9 +3,10 @@
   jobData.lastCheck = new Date()
   jobData.isUp = false
   if job._doc.retried > 1 # ensures that we only mark a service as failed after two attempts
-    Services.upsert {name: jobData.name}, jobData
+    Services.upsert {name: jobData.name, group: jobData.group}, jobData
     ServiceStatus.insert
       name: jobData.name
+      group: jobData.group
       date: jobData.lastCheck
       isUp: jobData.isUp
   job.fail()
@@ -24,9 +25,6 @@
 @JobsCollection  = JobCollection 'jobs'
 
 Meteor.startup ->
-
-  #JobsCollection.remove {}
-  #ConfigureJobs JobsCollection
 
   HttpStatusJob.process JobsCollection
   SshJob.process JobsCollection

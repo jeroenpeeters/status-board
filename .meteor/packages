@@ -20,3 +20,5 @@ zimme:active-route
 lookback:tooltips
 fourseven:scss
 underscore
+meteorhacks:aggregate
+reactive-var

@@ -1,8 +1,9 @@
 
 @HttpStatusJob =
-  create: (collection, name, url) ->
+  create: (collection, name, group, url) ->
     job = new Job collection, 'httpStatusJob',
       name: name
+      group: group
       url: url
     job.repeat
       repeats: collection.forever

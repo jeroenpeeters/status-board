@@ -18,4 +18,4 @@ Template['new-ssh-service'].events
       serviceDetails.privateKey = e.target.privateKey.value
 
 
-    Meteor.call 'newSshService', e.target.serviceName.value, serviceDetails
+    Meteor.call 'newSshService', e.target.serviceName.value, e.target.groupName.value, serviceDetails

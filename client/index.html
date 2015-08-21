@@ -3,29 +3,37 @@
 </head>
 
 <template name="header">
-
+  <ul class="nav nav-pills center-pills group-pills">
+    {{#each groups}}
+      <li role="presentation" class="{{groupActive}}"><a class="toggleGroup" href="#">{{group}}</a></li>
+    {{/each}}
+</ul>
 </template>
 
 <template name="index">
     {{> header }}
-    {{#each services}}
-    <div class="dash-tiles ">
-        <div class="dash-tile {{statusClass}} clearfix">
-            <div class="dash-tile-header">
+    {{#each groups}}
+      <h3 class="group-name">{{group}}</h3>
+      {{#each services}}
+      <div class="dash-tiles ">
+          <div class="dash-tile {{statusClass}} clearfix">
+              <div class="dash-tile-header">
                 {{name}}
-            </div>
-            <!--div class="dash-tile-icon"><i class="fa fa-users"></i></div-->
-            {{!--
-            <div class="dash-tile-timestamp">checked: {{lastCheckHuman}}</div>
-            --}}
-            <div class="dash-tile-text">
-                {{statusText}}
-            </div>
-            <div class="dash-tile-status">
-                {{> simpleServiceStatusGraph }}
-            </div>
-        </div>
-    </div>
+              </div>
+              <!--div class="dash-tile-icon"><i class="fa fa-users"></i></div-->
+              {{!--
+              <div class="dash-tile-timestamp">checked: {{lastCheckHuman}}</div>
+              --}}
+              <div class="dash-tile-text">
+                  {{statusText}}
+              </div>
+              <div class="dash-tile-status">
+                  {{> simpleServiceStatusGraph }}
+              </div>
+          </div>
+      </div>
+      {{/each}}
+      <div style="clear:left;"></div>
     {{/each}}
 </template>
 

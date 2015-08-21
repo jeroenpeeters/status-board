@@ -12,6 +12,9 @@ html, body {
     padding: 5px 20px 0 20px;
 }
 
+.dash-tiles {
+  padding: 0 0 0 10px;
+}
 .dash-tile {
     min-height: 190px;
     min-width: 250px;
@@ -84,7 +87,7 @@ html, body {
 }
 
 .statusPart {
-    width:5px; 
+    width:5px;
     height:15px;
     display: inline-block;
     margin: 0;
@@ -112,4 +115,22 @@ html, body {
 }
 .serviceUpDownNumber {
     font-size: 30px;
+}
+
+.group-pills > li > a, .group-pills > li.active > a:hover {
+  background-color: #DDDDDD !important;
+  color: white;
+}
+.group-pills > li > a:hover, .group-pills > li.active > a {
+  background-color: #AAAAAA !important;
+}
+
+.center-pills {
+    display: flex;
+    justify-content: center;
+}
+
+h3.group-name {
+  padding: 10px;
+  border-bottom: 1px solid #DDDDDD;
 }
