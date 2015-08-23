@@ -1,5 +1,7 @@
 <template name="base-layout">
-    {{> navbar }}
+    {{#if isDefaultMode}}
+      {{> navbar }}
+    {{/if}}
     <div class="page-content">
         {{> yield }}
     </div>

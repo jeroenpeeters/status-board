@@ -1,4 +1,5 @@
 Session.set 'displayType', 'tiles'
+Session.set 'mode', 'default'
 groups = new ReactiveVar null
 visibleGroups = new ReactiveVar null
 
@@ -7,6 +8,7 @@ findServicesByGroup = -> Services.find {group: @group}, sort: name: 1
 
 Template.index.helpers
   showAsTiles: -> Session.get('displayType') == 'tiles'
+  isDefaultMode: -> Session.get('mode') == 'default'
 
 Template.index.onCreated ->
   Meteor.call 'getGroups', (err, result) ->

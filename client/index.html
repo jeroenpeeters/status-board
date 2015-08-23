@@ -24,7 +24,9 @@
 </template>
 
 <template name="index">
-    {{> header }}
+    {{#if isDefaultMode}}
+      {{> header }}
+    {{/if}}
     {{#if showAsTiles}}
       {{> tiles}}
     {{else}}
