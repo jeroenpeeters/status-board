@@ -134,3 +134,10 @@ h3.group-name {
   padding: 10px;
   border-bottom: 1px solid #DDDDDD;
 }
+
+.table > tbody > tr.success > td {
+  border-bottom: 1px solid #2ECC40;
+}
+.table > tbody > tr.danger > td {
+  border-bottom: 1px solid #FF4136;
+}
