@@ -17,15 +17,17 @@ ssh2 = Meteor.npmRequire 'ssh2-connect'
       serviceDetails = _.extend {readyTimeout:2500}, job.data
       ssh2 serviceDetails, Meteor.bindEnvironment (err, session) ->
         if err
+          console.log err
           FailJob job
-          session.end()
+          session?.end()
           callback()
         else
           session.exec serviceDetails.cmd, Meteor.bindEnvironment (err, result) ->
             if err
+              console.log err
               FailJob job
             else
               CompleteJob job
 
-            session.end()
+            session?.end()
             callback()
