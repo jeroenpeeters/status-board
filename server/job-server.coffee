@@ -2,41 +2,50 @@
   jobData = job.data
   jobData.lastCheck = new Date()
   jobData.isUp = false
-  Services.upsert {name: jobData.name, group: jobData.group}, jobData
+  Services.upsert {name: jobData.name, type: jobData.type, group: jobData.group}, jobData
   ServiceStatus.insert
     name: jobData.name
     group: jobData.group
     date: jobData.lastCheck
     isUp: jobData.isUp
-  job.fail()
   callback()
 
 @CompleteJob = (job, callback) ->
   jobData = job.data
   jobData.lastCheck = new Date()
   jobData.isUp = true
-  Services.upsert {name: jobData.name}, jobData
+  Services.upsert {name: jobData.name, type: jobData.type, group: jobData.group}, jobData
   ServiceStatus.insert
     name: jobData.name
     date: jobData.lastCheck
     isUp: jobData.isUp
-  job.done()
   callback()
 
 @JobsCollection  = JobCollection 'jobs'
 
 Meteor.startup ->
 
-  staleJobsIds = JobsCollection.find(status: "running").map (job) -> job._id
-  console.log staleJobsIds
-  JobsCollection.getJobs staleJobsIds, (error, jobs) ->
-    jobs.forEach (job) ->
-      #console.log job
-      job.save()
-      job.repeat() # re-saving reschedules these stale jobs in the queue
+  processors =
+    http: HttpStatusJob
+    ssh: SshJob
 
+  for p of processors when processors[p].job
+    x = (p) ->
+      console.log "p=#{p}"
+      Cue.addJob "#{p}", {retryOnError:false, maxMs:30000}, (task, done) -> console.log "p=#{p}"; processors[p].job task, done
+    x p
 
-  HttpStatusJob.process JobsCollection
-  SshJob.process JobsCollection
+  Cue.start()
 
-  JobsCollection.startJobServer()
+  scheduleChecks = ->
+    console.log 'Looking for services to check'
+    Services.find().fetch().forEach (service) ->
+      if processors[service.type]
+        #console.log 'scheduling for type', service.type
+        Cue.addTask service.type, {isAsync:true, unique:false}, service
+      else
+        console.error 'No processors for service', service
+
+  Meteor.setInterval scheduleChecks, 60000
+
+  scheduleChecks() # perform initial checks

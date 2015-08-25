@@ -22,3 +22,5 @@ fourseven:scss
 underscore
 meteorhacks:aggregate
 reactive-var
+#differential:workers
+danimal:cue

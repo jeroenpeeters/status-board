@@ -16,6 +16,8 @@ ssh2 = Meteor.npmRequire 'ssh2-connect'
     collection.processJobs 'sshJob', {concurrency: 10}, (job, callback) =>
       @performCheck job, callback, 0
 
+  installJobHandler: ->
+
   performCheck: (job, callback, retryCount) ->
     serviceDetails = _.extend {readyTimeout:2500}, job.data
     ssh2 serviceDetails, Meteor.bindEnvironment (err, session) ->
