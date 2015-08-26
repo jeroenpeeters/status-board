@@ -19,3 +19,7 @@ Template['new-ssh-service'].events
 
 
     Meteor.call 'newSshService', e.target.serviceName.value, e.target.groupName.value, serviceDetails
+
+Template['new-ssh-service'].helpers
+  isEditAction: -> @action == 'edit'
+  

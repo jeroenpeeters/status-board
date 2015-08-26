@@ -36,6 +36,13 @@ html, body {
     background-color: #eee;
     opacity: .75;
 }
+a.editServiceAction {
+  padding-right:5px;
+  color:grey;
+}
+a.editServiceAction:hover {
+  color:black;
+}
 
 .dash-tile-options {
     float: right;

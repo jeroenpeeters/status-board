@@ -5,6 +5,7 @@ visibleGroups = new ReactiveVar null
 
 
 findServicesByGroup = -> Services.find {group: @group}, sort: name: 1
+editRoute = -> "service.#{@type}.edit"
 
 Template.index.helpers
   showAsTiles: -> Session.get('displayType') == 'tiles'
@@ -34,8 +35,9 @@ Template.tiles.helpers
   groups: -> visibleGroups.get()
   services: findServicesByGroup
   lastCheckHuman: -> moment(@lastCheck).fromNow()
-  statusClass: -> if @isUp then 'dash-tile-green' else 'dash-tile-red'
-  statusText: -> if @isUp then 'Up' else 'Down'
+  statusClass: -> if @isUp then 'dash-tile-green' else if @isDown then 'dash-tile-red' else 'dash-tile-grey'
+  statusText: -> if @isUp then 'Up' else if @isDown then 'Down' else "Unknown"
+  editRoute: editRoute
 Template.table.helpers
   groups: -> visibleGroups.get()
   services: findServicesByGroup
@@ -43,6 +45,7 @@ Template.table.helpers
   statusGlyphicon: -> if @isUp then 'ok-sign' else 'exclamation-sign'
   statusGlyphColor: -> if @isUp then '#2ECC40' else '#FF4136'
   statusClass: -> if @isUp then 'success' else 'danger'
+  editRoute: editRoute
 
 Template.simpleServiceStatusGraph.helpers
   statusColor: -> if @isUp then '#2ECC40' else '#FF4136'

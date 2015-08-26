@@ -3,37 +3,37 @@
         <div class="form-group">
             <label for="serviceName" class="col-sm-2 control-label">Service name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="serviceName" placeholder="">
+                <input type="text" class="form-control" id="serviceName" placeholder="" value="{{service.name}}">
             </div>
         </div>
         <div class="form-group">
             <label for="groupName" class="col-sm-2 control-label">Service group</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="groupName" placeholder="">
+                <input type="text" class="form-control" id="groupName" placeholder="" value="{{service.group}}">
             </div>
         </div>
         <div class="form-group">
             <label for="host" class="col-sm-2 control-label">IP/hostname</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="host" placeholder="">
+                <input type="text" class="form-control" id="host" placeholder="" value="{{service.host}}">
             </div>
         </div>
         <div class="form-group">
             <label for="port" class="col-sm-2 control-label">Port</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="port" placeholder="" value="22">
+                <input type="text" class="form-control" id="port" placeholder="22" value="{{service.port}}">
             </div>
         </div>
         <div class="form-group">
             <label for="cmd" class="col-sm-2 control-label">Command</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="cmd" placeholder="" value="pwd">
+                <input type="text" class="form-control" id="cmd" placeholder="pwd" value="{{service.cmd}}">
             </div>
         </div>
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="username" placeholder="">
+                <input type="text" class="form-control" id="username" placeholder="" value="{{service.username}}">
             </div>
         </div>
         <div class="form-group">
@@ -42,19 +42,19 @@
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="password" placeholder="">
+                        <input type="text" class="form-control" id="password" placeholder="" value="{{service.password}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="privateKeyPath" class="col-sm-2 control-label">Or Private Key Path</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="privateKeyPath" placeholder="">
+                        <input type="text" class="form-control" id="privateKeyPath" placeholder="" value="{{service.privateKeyPath}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="privateKey" class="col-sm-2 control-label">Or Private Key</label>
                     <div class="col-sm-10">
-                        <textarea rows="10" class="form-control" id="privateKey" placeholder=""></textarea>
+                        <textarea rows="10" class="form-control" id="privateKey" placeholder="">{{service.privateKey}}</textarea>
                     </div>
                 </div>
             </div>
