@@ -11,7 +11,7 @@ Template['base-layout'].helpers
 
 Template['base-layout'].rendered = ->
   $('body').on 'keydown', (e) ->
-    if e?.which == 80 # 'p' pressed
+    if e?.which == 80 and e.target.nodeName == "BODY" # 'p' pressed
       if Session.get('mode') == 'default'
         Session.set 'mode', 'presenter'
       else
