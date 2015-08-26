@@ -32,16 +32,18 @@ Meteor.startup ->
   for p of processors when processors[p].job
     x = (p) ->
       console.log "p=#{p}"
-      Cue.addJob "#{p}", {retryOnError:false, maxMs:30000}, (task, done) -> console.log "p=#{p}"; processors[p].job task, done
+      Cue.addJob "#{p}", {retryOnError:false, maxMs:30000}, (task, done) -> console.log "run p=#{p}"; processors[p].job task, done
     x p
 
+  Cue.dropTasks()
+  Cue.dropInProgressTasks()
   Cue.start()
 
   scheduleChecks = ->
     console.log 'Looking for services to check'
     Services.find().fetch().forEach (service) ->
       if processors[service.type]
-        #console.log 'scheduling for type', service.type
+        console.log 'scheduling for type', service.type
         Cue.addTask service.type, {isAsync:true, unique:false}, service
       else
         console.error 'No processors for service', service
