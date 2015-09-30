@@ -1,0 +1,7 @@
+<template name="grid">
+  {{#each groups}}
+    {{#each services}}
+    <div class="gridbox {{statusClass}}" data-tooltip="{{../group}} - {{name}}" data-tooltip-direction="s"></div>
+    {{/each}}
+  {{/each}}
+</template>

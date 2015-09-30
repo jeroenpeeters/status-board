@@ -1,14 +1,7 @@
-Session.set 'displayType', 'tiles'
-Session.set 'mode', 'default'
-groups = new ReactiveVar null
-visibleGroups = new ReactiveVar null
-
-
-findServicesByGroup = -> Services.find {group: @group}, sort: name: 1
 editRoute = -> "service.#{@type}.edit"
 
 Template.index.helpers
-  showAsTiles: -> Session.get('displayType') == 'tiles'
+  showAs: (type) -> Session.get('displayType') == type
   isDefaultMode: -> Session.get('mode') == 'default'
 
 Template.index.onCreated ->
@@ -21,6 +14,7 @@ Template.header.helpers
   groupActive: -> 'active' if @ in visibleGroups.get()
   activeWhenShowAsTiles: -> 'active' if Session.get('displayType') == 'tiles'
   activeWhenShowAsTable: -> 'active' if Session.get('displayType') == 'table'
+  activeWhenShowAsGrid: -> 'active' if Session.get('displayType') == 'grid'
 
 Template.header.events
   'click .toggleGroup': ->
@@ -30,6 +24,7 @@ Template.header.events
       visibleGroups.set _.union visibleGroups.get(), [@]
   'click #showAsTiles': -> Session.set 'displayType', 'tiles'
   'click #showAsTable': -> Session.set 'displayType', 'table'
+  'click #showAsGrid': -> Session.set 'displayType', 'grid'
 
 Template.tiles.helpers
   groups: -> visibleGroups.get()

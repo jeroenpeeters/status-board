@@ -15,6 +15,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="{{activeWhenShowAsTiles}}"><a id="showAsTiles" href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
           <li class="{{activeWhenShowAsTable}}"><a id="showAsTable" href="#"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></li>
+          <li class="{{activeWhenShowAsGrid}}"><a id="showAsGrid" href="#"><span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span></a></li>
         </ul>
       </div>
 
@@ -27,10 +28,14 @@
     {{#if isDefaultMode}}
       {{> header }}
     {{/if}}
-    {{#if showAsTiles}}
+    {{#if showAs 'tiles'}}
       {{> tiles}}
-    {{else}}
+    {{/if}}
+    {{#if showAs 'table'}}
       {{> table .}}
+    {{/if}}
+    {{#if showAs 'grid'}}
+      {{> grid .}}
     {{/if}}
 </template>
 
