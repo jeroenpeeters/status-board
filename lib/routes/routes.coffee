@@ -9,3 +9,8 @@ Meteor.startup ->
       subscriptions: -> [
         Meteor.subscribe 'services'
       ]
+    @route 'sunburst',
+      path: '/sunburst'
+      subscriptions: -> [
+        Meteor.subscribe 'services'
+      ]
