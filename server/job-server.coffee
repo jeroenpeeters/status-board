@@ -30,10 +30,7 @@ Meteor.startup ->
     ssh: SshJob
 
   for p of processors when processors[p].job
-    x = (p) ->
-      console.log "p=#{p}"
-      Cue.addJob "#{p}", {retryOnError:false, maxMs:30000}, (task, done) -> console.log "run p=#{p}"; processors[p].job task, done
-    x p
+    Cue.addJob "#{p}", {retryOnError:false, maxMs:30000}, processors[p].job.bind(processors[p])
 
   Cue.dropTasks()
   Cue.dropInProgressTasks()
