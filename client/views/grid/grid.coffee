@@ -2,4 +2,4 @@ Template.grid.helpers
   groups: -> visibleGroups.get()
   services: findServicesByGroup
   lastCheckHuman: -> moment(@lastCheck).fromNow()
-  statusClass: -> if @isUp then 'grid-green' else if @isDown then 'grid-red' else 'grid-grey'
+  statusClass: -> console.log @; if @isUp then 'grid-green' else if !@isUp then 'grid-red' else 'grid-grey'

@@ -30,8 +30,8 @@ Template.tiles.helpers
   groups: -> visibleGroups.get()
   services: findServicesByGroup
   lastCheckHuman: -> moment(@lastCheck).fromNow()
-  statusClass: -> if @isUp then 'dash-tile-green' else if @isDown then 'dash-tile-red' else 'dash-tile-grey'
-  statusText: -> if @isUp then 'Up' else if @isDown then 'Down' else "Unknown"
+  statusClass: -> if @isUp then 'dash-tile-green' else if !@isUp then 'dash-tile-red' else 'dash-tile-grey'
+  statusText: -> if @isUp then 'Up' else if !@isUp then 'Down' else "Unknown"
   editRoute: editRoute
 Template.table.helpers
   groups: -> visibleGroups.get()
