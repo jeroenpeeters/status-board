@@ -8,13 +8,19 @@
       url: url
 
   job: (task, done) ->
-    console.log task.jobName, task.data
+    #console.log task.jobName, task.data
     @performCheck task, done, 0
 
   performCheck: (job, callback, retryCount) ->
-    HTTP.get job.data.url, timeout: 2500, (err, data) =>
+    console.log 'check =>', job.data.url
+    options =
+      timeout: 5000
+      npmRequestOptions:
+        agent: false
+    HTTP.get job.data.url, options,  (err, data) =>
       if err or not data
         if retryCount > 2
+          console.log err
           FailJob job, callback
         else
           @retryJob job, callback, retryCount
@@ -23,6 +29,6 @@
 
   retryJob: (job, callback, retryCount) ->
     Meteor.setTimeout =>
-      console.log 'retrying job', job.data.name
+      console.log 'retrying job', job.data.url
       @performCheck job, callback, retryCount+1
     , 2000
