@@ -30,21 +30,21 @@ Template.tiles.helpers
   groups: -> visibleGroups.get()
   services: findServicesByGroup
   lastCheckHuman: -> moment(@lastCheck).fromNow()
-  statusClass: -> if @isUp then 'dash-tile-green' else if !@isUp then 'dash-tile-red' else 'dash-tile-grey'
-  statusText: -> if @isUp then 'Up' else if !@isUp then 'Down' else "Unknown"
+  statusClass: -> if IsUp(@)  then 'dash-tile-green' else if IsDown(@) then 'dash-tile-red' else 'dash-tile-grey'
+  statusText: -> if IsUp(@)  then 'Up' else if IsDown(@) then 'Down' else "Unknown"
   editRoute: editRoute
 Template.table.helpers
   groups: -> visibleGroups.get()
   services: findServicesByGroup
   lastCheckHuman: -> moment(@lastCheck).fromNow()
-  statusGlyphicon: -> if @isUp then 'ok-sign' else 'exclamation-sign'
-  statusGlyphColor: -> if @isUp then '#2ECC40' else '#FF4136'
-  statusClass: -> if @isUp then 'success' else 'danger'
+  statusGlyphicon: -> if IsUp(@)  then 'ok-sign' else 'exclamation-sign'
+  statusGlyphColor: -> if IsUp(@)  then '#2ECC40' else '#FF4136'
+  statusClass: -> if IsUp(@)  then 'success' else 'danger'
   editRoute: editRoute
 
 Template.simpleServiceStatusGraph.helpers
-  statusColor: -> if @isUp then '#2ECC40' else '#FF4136'
-  borderStatusColor: -> if @isUp then 'green' else 'red'
+  statusColor: -> if IsUp(@)  then '#2ECC40' else '#FF4136'
+  borderStatusColor: -> if IsUp(@) then 'green' else 'red'
   serviceStatus: ->
     Meteor.subscribe 'service/status', {name: @name}
     ServiceStatus.find {name: @name}, sort: date: -1

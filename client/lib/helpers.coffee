@@ -5,3 +5,6 @@ Session.set 'mode', 'default' if not Session.get 'mode'
 @visibleGroups = new ReactiveVar null
 
 @findServicesByGroup = -> Services.find {group: @group}, sort: name: 1
+
+@IsUp = (service) -> service.isUp
+@IsDown = (service) -> service.isUp == false and service.isUp != undefined
