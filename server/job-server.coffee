@@ -32,6 +32,7 @@ Meteor.startup ->
   for p of processors when processors[p].job
     Cue.addJob "#{p}", {retryOnError:false, maxMs:30000}, processors[p].job.bind(processors[p])
 
+  Cue.maxTasksAtOnce = 8
   Cue.dropTasks()
   Cue.dropInProgressTasks()
   Cue.start()
@@ -40,8 +41,7 @@ Meteor.startup ->
     console.log 'Looking for services to check'
     Services.find().fetch().forEach (service) ->
       if processors[service.type]
-        console.log 'scheduling for type', service.type
-        Cue.addTask service.type, {isAsync:true, unique:false}, service
+        Cue.addTask service.type, {isAsync:true, unique:true}, service
       else
         console.error 'No processors for service', service
 
