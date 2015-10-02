@@ -1,11 +1,16 @@
+hyperquest = Meteor.npmRequire 'hyperquest'
 
 @HttpStatusJob =
   create: (name, group, url) ->
-    Services.upsert {name: name, type: 'http', group: group},
+    obj =
       type: 'http'
       name: name
       group: group
       url: url
+    if Services.findOne {name: name, type: 'http', group: group}
+      Services.update {name: name, type: 'http', group: group}, $set: obj
+    else
+      Services.insert obj
 
   job: (task, done) ->
     #console.log task.jobName, task.data
@@ -13,19 +18,27 @@
 
   performCheck: (job, callback, retryCount) ->
     console.log 'check =>', job.data.url
-    options =
-      timeout: 5000
-      npmRequestOptions:
-        agent: false
-    HTTP.get job.data.url, options,  (err, data) =>
-      if err or not data
+    stream = hyperquest.get job.data.url,
+      timeout: 10000
+
+    stream.on 'error', Meteor.bindEnvironment (err) =>
+      if retryCount > 2
+        console.log "HTTP.Error #{job.data.url} =>", err
+        FailJob job, callback
+      else
+        @retryJob job, callback, retryCount
+    #stream.on 'data', (data) ->
+    #  console.log "onData #{job.data.url} -> #{data}"
+
+    stream.on 'response', Meteor.bindEnvironment (response) =>
+      if response.statusCode >= 200 and response.statusCode < 300
+        CompleteJob job, callback
+      else
         if retryCount > 2
-          console.log err
+          console.log "HTTP.StatusCode err #{job.data.url} => #{response.statusCode}"
           FailJob job, callback
         else
           @retryJob job, callback, retryCount
-      else
-        CompleteJob job, callback
 
   retryJob: (job, callback, retryCount) ->
     Meteor.setTimeout =>

@@ -46,7 +46,6 @@
     <div class="dash-tiles ">
         <div class="dash-tile {{statusClass}} clearfix">
             <div class="dash-tile-header">
-              {{name}}
               <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
             </div>
             <!--div class="dash-tile-icon"><i class="fa fa-users"></i></div-->
@@ -54,7 +53,7 @@
             <div class="dash-tile-timestamp">checked: {{lastCheckHuman}}</div>
             --}}
             <div class="dash-tile-text">
-                {{statusText}}
+                {{name}}
             </div>
             <div class="dash-tile-status">
                 {{> simpleServiceStatusGraph }}
@@ -67,13 +66,12 @@
 </template>
 
 <template name="table">
-  <table class="table table-hover">
   {{#each groups}}
+  <table class="table table-hover" style="width:16%; float:left;">
     <thead>
       <tr>
         <th colspan="2" style="font-size:150%">{{group}}</th>
-        <th>Last checked</th>
-        <th colspan="2"></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -86,19 +84,15 @@
           {{name}}
         </td>
         <td>
-          {{lastCheckHuman}}
-        </td>
-        <td>
-          {{> simpleServiceStatusGraph }}
-        </td>
-        <td>
+          {{#if isDefaultMode}}
           <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
+          {{/if}}
         </td>
       </tr>
     {{/each}}
     </tbody>
-  {{/each}}
   </table>
+  {{/each}}
 </template>
 
 <template name="simpleServiceStatusGraph">

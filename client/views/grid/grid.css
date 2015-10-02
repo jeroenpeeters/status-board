@@ -7,15 +7,19 @@ div.gridbox:hover {
   border:1px solid grey;
 }
 
-.grid-green {
+.gridbox.status-up {
   background-color: #5cb85c;
   border: 1px solid #5cb85c;
 }
-.grid-red {
+.gridbox.status-down {
   background-color: #d9534f;
   border: 1px solid #d9534f;
 }
-.grid-grey {
+.gridbox.status-down-in-last-hour {
+  background-color: #faf2cc;
+  border: 1px solid #faf2cc;
+}
+.gridbox.status-unknown {
   background-color: #e9e9e9;
   border: 1px solid #e9e9e9;
 }

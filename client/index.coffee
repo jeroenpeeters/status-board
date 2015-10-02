@@ -33,13 +33,16 @@ Template.tiles.helpers
   statusClass: -> if IsUp(@)  then 'dash-tile-green' else if IsDown(@) then 'dash-tile-red' else 'dash-tile-grey'
   statusText: -> if IsUp(@)  then 'Up' else if IsDown(@) then 'Down' else "Unknown"
   editRoute: editRoute
+Template.tiles.onRendered ->
+
 Template.table.helpers
+  isDefaultMode: -> Session.get('mode') == 'default'
   groups: -> visibleGroups.get()
   services: findServicesByGroup
   lastCheckHuman: -> moment(@lastCheck).fromNow()
   statusGlyphicon: -> if IsUp(@)  then 'ok-sign' else 'exclamation-sign'
-  statusGlyphColor: -> if IsUp(@)  then '#2ECC40' else '#FF4136'
-  statusClass: -> if IsUp(@)  then 'success' else 'danger'
+  statusGlyphColor: -> if IsUp(@) then '#2ECC40' else '#FF4136'
+  statusClass: -> StatusColorClass @#if IsUp(@)  then 'success' else 'danger'
   editRoute: editRoute
 
 Template.simpleServiceStatusGraph.helpers

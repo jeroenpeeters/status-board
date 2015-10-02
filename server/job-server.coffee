@@ -1,8 +1,11 @@
 @FailJob = (job, callback, err) ->
   jobData = job.data
-  jobData.lastCheck = new Date()
-  jobData.isUp = false
-  Services.upsert {name: jobData.name, type: jobData.type, group: jobData.group}, jobData
+  date = new Date()
+  status =
+    lastCheck: date
+    lastDownTime: date
+    isUp: false
+  Services.update {name: jobData.name, type: jobData.type, group: jobData.group}, $set: status
   ServiceStatus.insert
     name: jobData.name
     group: jobData.group
@@ -12,9 +15,10 @@
 
 @CompleteJob = (job, callback) ->
   jobData = job.data
-  jobData.lastCheck = new Date()
-  jobData.isUp = true
-  Services.upsert {name: jobData.name, type: jobData.type, group: jobData.group}, jobData
+  status =
+    lastCheck: new Date()
+    isUp: true
+  Services.update {name: jobData.name, type: jobData.type, group: jobData.group}, $set: status
   ServiceStatus.insert
     name: jobData.name
     date: jobData.lastCheck

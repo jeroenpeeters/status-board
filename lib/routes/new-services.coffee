@@ -11,8 +11,9 @@ Meteor.startup ->
     @route 'service.http.edit',
       template: 'new-http-service'
       path: '/service/http/edit/:id'
+      subscriptions: -> Meteor.subscribe 'service', @params.id
       data: ->
-        service: Services.find _id: @params.id
+        service: Services.findOne _id: @params.id
         action: 'edit'
 
     @route 'service.ssh.create',
