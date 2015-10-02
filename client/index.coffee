@@ -33,7 +33,15 @@ Template.tiles.helpers
   statusClass: -> if IsUp(@)  then 'dash-tile-green' else if IsDown(@) then 'dash-tile-red' else 'dash-tile-grey'
   statusText: -> if IsUp(@)  then 'Up' else if IsDown(@) then 'Down' else "Unknown"
   editRoute: editRoute
-Template.tiles.onRendered ->
+
+Template.table.onRendered ->
+  Meteor.setTimeout ->
+    $('.masonry-grid').isotope
+      itemSelector: 'table',
+        masonry:
+          columnWidth: 300
+          gutter: 5
+  , 10
 
 Template.table.helpers
   isDefaultMode: -> Session.get('mode') == 'default'

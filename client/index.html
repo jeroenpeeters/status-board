@@ -66,33 +66,35 @@
 </template>
 
 <template name="table">
-  {{#each groups}}
-  <table class="table table-hover" style="width:16%; float:left;">
-    <thead>
-      <tr>
-        <th colspan="2" style="font-size:150%">{{group}}</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    {{#each services}}
-      <tr class="{{statusClass}}">
-        <td style="width:50px; text-align:center;">
-          <span class="glyphicon glyphicon-{{statusGlyphicon}}" style="color:{{statusGlyphColor}}" aria-hidden="true"></span>
-        </td>
-        <td>
-          {{name}}
-        </td>
-        <td>
-          {{#if isDefaultMode}}
-          <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
-          {{/if}}
-        </td>
-      </tr>
+  <div class="masonry-grid">
+    {{#each groups}}
+    <table class="table table-hover" style="width:16%;min-width:300px;margin-right:5px;">
+      <thead>
+        <tr>
+          <th colspan="2" style="font-size:150%">{{group}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each services}}
+        <tr class="{{statusClass}}">
+          <td style="width:50px; text-align:center;">
+            <span class="glyphicon glyphicon-{{statusGlyphicon}}" style="color:{{statusGlyphColor}}" aria-hidden="true"></span>
+          </td>
+          <td>
+            {{name}}
+          </td>
+          <td>
+            {{#if isDefaultMode}}
+            <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
     {{/each}}
-    </tbody>
-  </table>
-  {{/each}}
+  </div>
 </template>
 
 <template name="simpleServiceStatusGraph">
