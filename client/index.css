@@ -143,19 +143,31 @@ h3.group-name {
   border-bottom: 1px solid #DDDDDD;
 }
 
-.table > tbody > tr.status-up > td {
+.table > tbody > tr.status-up {
   background-color: #dff0d8;
   border-bottom: 1px solid #2ECC40;
 }
-.table > tbody > tr.status-down > td {
+.table > tbody > tr.status-down {
   background-color: #f2dede;
   border-bottom: 1px solid #FF4136;
+
+  -webkit-animation-direction: normal;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: blink;
+  -webkit-animation-timing-function: ease;
 }
-.table > tbody > tr.status-down-in-last-hour > td {
+.table > tbody > tr.status-down-in-last-hour {
   background-color: #faf2cc;
   border-bottom: 1px solid yellow;
 }
-.table > tbody > tr.status-unknown > td {
+.table > tbody > tr.status-unknown {
   background-color: #e9e9e9;
   border-bottom: 1px solid grey;
+}
+
+@-webkit-keyframes blink {
+  0% { background: #f2dede; color:black;}
+  50% { background: #f2dede; color:black;}
+  100% { background: rgb(153,0,0); color:white; }
 }
