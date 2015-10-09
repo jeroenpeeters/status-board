@@ -171,3 +171,16 @@ h3.group-name {
   50% { background: #f2dede; color:black;}
   100% { background: rgb(153,0,0); color:white; }
 }
+
+.table > tbody > tr.upNow {
+  -webkit-animation-direction: normal;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-name: upnow;
+  -webkit-animation-timing-function: ease;
+}
+
+@-webkit-keyframes upnow {
+  0% { background: green; color:black;}
+  100% { background: #2ECC40; color:black; }
+}
