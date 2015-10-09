@@ -56,7 +56,7 @@
                 {{name}}
             </div>
             <div class="dash-tile-status">
-                {{> simpleServiceStatusGraph }}
+
             </div>
         </div>
     </div>
@@ -82,7 +82,9 @@
             <span class="glyphicon glyphicon-{{statusGlyphicon}}" style="color:{{statusGlyphColor}}" aria-hidden="true"></span>
           </td>
           <td>
-            {{name}}
+            <a class="serviceDetailsLink" href="{{pathFor route='service.details' id=_id}}">
+              {{name}}
+            </a>
           </td>
           <td>
             {{#if isDefaultMode}}
@@ -95,10 +97,4 @@
     </table>
     {{/each}}
   </div>
-</template>
-
-<template name="simpleServiceStatusGraph">
-    {{#each serviceStatus}}
-        <div class="statusPart" style="background-color:{{statusColor}};border-bottom:2px solid {{borderStatusColor}};border-top:2px solid {{borderStatusColor}};" data-tooltip="{{dateFromNow}}" data-tooltip-direction="s"></div>
-    {{/each}}
 </template>

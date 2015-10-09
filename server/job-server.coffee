@@ -7,8 +7,7 @@
     isUp: false
   Services.update {name: jobData.name, type: jobData.type, group: jobData.group}, $set: status
   ServiceStatus.insert
-    name: jobData.name
-    group: jobData.group
+    serviceId: jobData._id
     date: jobData.lastCheck
     isUp: jobData.isUp
   callback()
@@ -20,7 +19,7 @@
     isUp: true
   Services.update {name: jobData.name, type: jobData.type, group: jobData.group}, $set: status
   ServiceStatus.insert
-    name: jobData.name
+    serviceId: jobData._id
     date: jobData.lastCheck
     isUp: jobData.isUp
   callback()
@@ -49,6 +48,6 @@ Meteor.startup ->
       else
         console.error 'No processors for service', service
 
-  Meteor.setInterval scheduleChecks, 60000
+  Meteor.setInterval scheduleChecks, 10000
 
   scheduleChecks() # perform initial checks

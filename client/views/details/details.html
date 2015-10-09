@@ -1,0 +1,27 @@
+<template name="service.details">
+  {{#with service}}
+  <h1>{{group}} &raquo; {{name}}</h1>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Type</th>
+        <td>{{type}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Checked on</th>
+        <td>{{lastCheck}} - {{lastCheckFromNow}}</td>
+      </tr>
+      <tr>
+        <th scope="row">History</th>
+        <td>{{> simpleServiceStatusGraph ..}}</td>
+      </tr>
+    </tbody>
+  </table>
+  {{/with}}
+</template>
+
+<template name="simpleServiceStatusGraph">
+  {{#each history}}
+    <span class="statusPart" style="background-color:{{statusColor}};border-bottom:2px solid {{borderStatusColor}};border-top:2px solid {{borderStatusColor}};" data-tooltip="{{dateFromNow}}" data-tooltip-direction="s"></span>
+  {{/each}}
+</template>

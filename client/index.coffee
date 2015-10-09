@@ -52,11 +52,3 @@ Template.table.helpers
   statusGlyphColor: -> if IsUp(@) then '#2ECC40' else '#FF4136'
   statusClass: -> StatusColorClass @#if IsUp(@)  then 'success' else 'danger'
   editRoute: editRoute
-
-Template.simpleServiceStatusGraph.helpers
-  statusColor: -> if IsUp(@)  then '#2ECC40' else '#FF4136'
-  borderStatusColor: -> if IsUp(@) then 'green' else 'red'
-  serviceStatus: ->
-    Meteor.subscribe 'service/status', {name: @name}
-    ServiceStatus.find {name: @name}, sort: date: -1
-  dateFromNow: -> moment(@date).fromNow()

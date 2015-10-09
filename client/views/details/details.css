@@ -1,0 +1,8 @@
+.statusPart {
+  width:5px;
+  height:15px;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  float:left;
+}
