@@ -41,7 +41,7 @@ Template.table.onRendered ->
         masonry:
           columnWidth: 300
           gutter: 5
-  , 10
+  , 500
 
 Template.table.helpers
   isDefaultMode: -> Session.get('mode') == 'default'
