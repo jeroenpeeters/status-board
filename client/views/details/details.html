@@ -12,6 +12,14 @@
         <td>{{lastCheck}} - {{lastCheckFromNow}}</td>
       </tr>
       <tr>
+        <th scope="row">Last down on</th>
+        {{#if lastDownTime}}
+        <td>{{lastDownTime}} - {{lastDownTimeFromNow}}</td>
+        {{else}}
+        <td>never</td>
+        {{/if}}
+      </tr>
+      <tr>
         <th scope="row">History</th>
         <td>{{> simpleServiceStatusGraph ..}}</td>
       </tr>
