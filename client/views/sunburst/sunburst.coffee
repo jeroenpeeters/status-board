@@ -6,7 +6,8 @@ Template.sunburst.onRendered ->
 
       createChildren = (name) ->
         console.log 'createChildren', name
-        x = Services.find({group: name}, sort: name: 1).fetch().map ((item) -> name: item.name, size:1)
+        x = Services.find({group: name}, sort: name: 1).fetch().map (item) ->
+          name: item.name, group: item.group, isUp: item.isUp, size:1
         console.log 'x',x
         x
       createNode = (name) -> {name: name, children: createChildren(name)}

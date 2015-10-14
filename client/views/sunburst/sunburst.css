@@ -1,21 +1,23 @@
+.sunburst {
+
+}
 .sunburst #main {
-  float: left;
+  display: table;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+}
+.sunburst #chart {
   width: 750px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
-.sunburst #sidebar {
-  float: right;
-  width: 100px;
-}
-
-.sunburst #sequence {
-  width: 600px;
-  height: 70px;
-}
-
-.sunburst #legend {
-  padding: 10px 0 0 3px;
-}
 
 .sunburst #sequence text, .sunburst #legend text {
   font-weight: 600;
@@ -32,14 +34,13 @@
 
 .sunburst #explanation {
   position: absolute;
-  top: 260px;
-  left: 305px;
-  width: 140px;
+  top: 45%;
+  width: 100%;
   text-align: center;
   color: #666;
   z-index: -1;
+  font-size: 20px;
 }
-
-.sunburst #percentage {
-  font-size: 2.5em;
+.sunburst #groupName {
+  font-weight:bold;
 }
