@@ -1,9 +1,6 @@
 Template['edit-ssh-service'].events
   'submit form': (e, tpl) ->
     e.preventDefault()
-
-    console.log 'form submit new ssh'
-
     serviceDetails =
       host: e.target.host.value
       port: e.target.port.value
@@ -17,9 +14,7 @@ Template['edit-ssh-service'].events
     else if e.target.privateKey.value
       serviceDetails.privateKey = e.target.privateKey.value
 
-
-    Meteor.call 'newSshService', e.target.serviceName.value, e.target.groupName.value, serviceDetails
-
-Template['edit-ssh-service'].helpers
-  isEditAction: -> @action == 'edit'
-  
+    if @service
+      Meteor.call 'updateSshService', @service._id, e.target.serviceName.value, e.target.groupName.value, serviceDetails
+    else
+      Meteor.call 'addSshService', e.target.serviceName.value, e.target.groupName.value, serviceDetails
