@@ -1,23 +1,11 @@
 request = Meteor.npmRequire('hyperdirect')(10)
 
 @HttpStatusJob =
-  create: (name, group, url) ->
-    Services.insert
-      type: 'http'
-      name: name
-      group: group
-      url: url
+  create: (jobData) ->
+    Services.insert _.extend(jobData, {type: 'http'})
 
-  update: (id, name, group, url) ->
-    Services.update {_id: id}, $set:
-      type: 'http'
-      name: name
-      group: group
-      url: url
-
-  remove: (id) ->
-    Services.remove _id: id, ->
-      ServiceStatus.remove serviceId: id
+  update: (id, jobData) ->
+    Services.update {_id: id}, $set: jobData
 
   job: (task, done) ->
     #console.log task.jobName, task.data
@@ -34,12 +22,19 @@ request = Meteor.npmRequire('hyperdirect')(10)
         FailJob job, callback
       else
         @retryJob job, callback, retryCount
-    #stream.on 'data', (data) ->
-    #  console.log "onData #{job.data.url} -> #{data}"
 
     stream.on 'response', Meteor.bindEnvironment (response) =>
       if response.statusCode >= 200 and response.statusCode < 300
-        CompleteJob job, callback
+        if job.data.regex
+          result = ""
+          response.on 'data', (data) -> result = result + data.toString()
+          response.on 'end', Meteor.bindEnvironment =>
+            if result.match new RegExp(job.data.regex, 'i')
+              CompleteJob job, callback
+            else
+              FailJob job, callback
+        else
+          CompleteJob job, callback
       else
         if retryCount > 2
           console.log "HTTP.StatusCode err #{job.data.url} => #{response.statusCode}"
