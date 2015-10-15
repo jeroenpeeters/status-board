@@ -15,6 +15,10 @@ hyperquest = Meteor.npmRequire 'hyperquest'
       group: group
       url: url
 
+  remove: (id) ->
+    Services.remove _id: id, ->
+      ServiceStatus.remove serviceId: id
+
   job: (task, done) ->
     #console.log task.jobName, task.data
     @performCheck task, done, 0
