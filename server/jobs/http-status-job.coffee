@@ -2,15 +2,18 @@ hyperquest = Meteor.npmRequire 'hyperquest'
 
 @HttpStatusJob =
   create: (name, group, url) ->
-    obj =
+    Services.insert
       type: 'http'
       name: name
       group: group
       url: url
-    if Services.findOne {name: name, type: 'http', group: group}
-      Services.update {name: name, type: 'http', group: group}, $set: obj
-    else
-      Services.insert obj
+
+  update: (id, name, group, url) ->
+    Services.update {_id: id}, $set:
+      type: 'http'
+      name: name
+      group: group
+      url: url
 
   job: (task, done) ->
     #console.log task.jobName, task.data
