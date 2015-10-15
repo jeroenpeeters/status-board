@@ -1,4 +1,4 @@
-hyperquest = Meteor.npmRequire 'hyperquest'
+request = Meteor.npmRequire('hyperdirect')(10)
 
 @HttpStatusJob =
   create: (name, group, url) ->
@@ -25,7 +25,7 @@ hyperquest = Meteor.npmRequire 'hyperquest'
 
   performCheck: (job, callback, retryCount) ->
     console.log 'check =>', job.data.url
-    stream = hyperquest.get job.data.url,
+    stream = request job.data.url,
       timeout: 10000
 
     stream.on 'error', Meteor.bindEnvironment (err) =>
