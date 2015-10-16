@@ -1,3 +1,5 @@
+selectedCheckType = new ReactiveVar null
+
 Template['edit-http-service'].events
   'submit form': (e, tpl) ->
     e.preventDefault()
@@ -12,6 +14,9 @@ Template['edit-http-service'].events
     else
       Meteor.call 'addHttpService', jobData
 
+Template.httpServiceChecks.helpers
+  selectedCheckType: -> selectedCheckType.get()
+
 Template.httpServiceChecks.events
   'change #checkType': (e) ->
-    console.log e.currentTarget.value
+    selectedCheckType.set e.currentTarget.value
