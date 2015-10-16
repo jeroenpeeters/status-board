@@ -10,7 +10,22 @@ Meteor.startup ->
         Meteor.subscribe 'services'
       ]
     @route 'sunburst',
-      path: '/sunburst'
+      path: '/view/sunburst'
+      subscriptions: -> [
+        Meteor.subscribe 'services'
+      ]
+    @route 'tiles',
+      path: '/view/tiles'
+      subscriptions: -> [
+        Meteor.subscribe 'services'
+      ]
+    @route 'tables',
+      path: '/view/tables'
+      subscriptions: -> [
+        Meteor.subscribe 'services'
+      ]
+    @route 'grid',
+      path: '/view/grid'
       subscriptions: -> [
         Meteor.subscribe 'services'
       ]
@@ -24,10 +39,3 @@ Meteor.startup ->
       data: ->
         service: Services.findOne _id: @params.id
         history: ServiceStatus.find {serviceId: @params.id}, sort: date: -1
-
-    # @route 'view.tiles',
-    #   template: 'view.tiles'
-    #   path: '/view/tiles'
-    #   subscriptions: -> [
-    #     Meteor.subscribe 'services'
-    #   ]

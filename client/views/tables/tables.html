@@ -1,0 +1,33 @@
+<template name="tables">
+  <div class="masonry-grid">
+    {{#each groups}}
+    <table class="table table-hover" style="width:300px;margin-right:5px;margin-bottom:0 !important;">
+      <thead>
+        <tr>
+          <th colspan="2" style="font-size:150%">{{group}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each services}}
+        <tr class="{{statusClass}}">
+          <td style="width:50px; text-align:center;">
+            <span class="glyphicon glyphicon-{{statusGlyphicon}}" style="color:{{statusGlyphColor}}" aria-hidden="true"></span>
+          </td>
+          <td>
+            <a class="serviceDetailsLink" href="{{pathFor route='service.details' id=_id}}">
+              {{name}}
+            </a>
+          </td>
+          <td>
+            {{#if isDefaultMode}}
+            <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+    {{/each}}
+  </div>
+</template>

@@ -1,0 +1,25 @@
+<template name="tiles">
+  {{#each groups}}
+    <h3 class="group-name">{{group}}</h3>
+    {{#each services}}
+    <div class="dash-tiles ">
+        <div class="dash-tile {{statusClass}} clearfix">
+            <div class="dash-tile-header">
+              <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
+            </div>
+            <!--div class="dash-tile-icon"><i class="fa fa-users"></i></div-->
+            {{!--
+            <div class="dash-tile-timestamp">checked: {{lastCheckHuman}}</div>
+            --}}
+            <div class="dash-tile-text">
+                {{name}}
+            </div>
+            <div class="dash-tile-status">
+
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    <div style="clear:left;"></div>
+  {{/each}}
+</template>

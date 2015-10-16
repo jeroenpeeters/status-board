@@ -26,6 +26,24 @@
                   </ul>
               </li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+              {{> groupSelector}}
+            </li>
+            <li class="{{isActiveRoute name='tiles'}}"><a href="{{pathFor 'tiles'}}"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
+            <li class="{{isActiveRoute name='tables'}}"><a href="{{pathFor 'tables'}}"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></li>
+            <li class="{{isActiveRoute name='grid'}}"><a href="{{pathFor 'grid'}}"><span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span></a></li>
+            <li class="{{isActiveRoute name='sunburst'}}"><a href="{{pathFor 'sunburst'}}"><img src="/images/sunburst-icon.png" style="width:18px"/></a></li>
+          </ul>
       </div>
   </div>
+</template>
+
+<template name="groupSelector">
+  <ul class="groupSelector dropdown-menu">
+    {{#each groups}}
+      <li><a class="toggleGroup" href="#"><span class="glyphicon glyphicon-{{glyphicon}}"></span> {{group}}</a></li>
+    {{/each}}
+  </ul>
 </template>

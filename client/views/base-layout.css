@@ -1,0 +1,9 @@
+ul.groupSelector > li > a{
+  padding-left:10px;
+  padding-right:10px;
+}
+
+ul.groupSelector > li > a > .glyphicon{
+  margin-right:10px;
+  font-size:80%;
+}
