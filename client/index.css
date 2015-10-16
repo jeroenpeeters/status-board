@@ -160,3 +160,19 @@ a.serviceDetailsLink {
   0% { background: green; color:black;}
   100% { background: #2ECC40; color:black; }
 }
+
+.indexPage {
+  display: table;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+}
+.indexPage .content {
+  display: table-cell;
+  vertical-align: middle;
+}
