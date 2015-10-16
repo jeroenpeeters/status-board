@@ -1,4 +1,4 @@
-<template name="base-layout">
+<template name="baseLayout">
     <audio id="siren1" src="/sounds/siren-slow-turn-off.mp3" ></audio>
     <audio id="siren2" src="/sounds/dun-dun-dun-sound-effect-brass.mp3" ></audio>
 
@@ -6,7 +6,7 @@
       {{> navbar }}
     {{/if}}
     <div class="page-content">
-        {{> yield }}
+      {{> yield }}
     </div>
 
     {{ > tooltips }}

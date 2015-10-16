@@ -1,1 +1,0 @@
-editRoute = -> "service.#{@type}.edit"

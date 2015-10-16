@@ -1,7 +1,7 @@
-Template['base-layout'].helpers
+Template.baseLayout.helpers
   isDefaultMode: -> Session.get('mode') == 'default'
 
-Template['base-layout'].rendered = ->
+Template.baseLayout.rendered = ->
   $('body').on 'keydown', (e) ->
     if e?.which == 80 and e.target.nodeName == "BODY" # 'p' pressed
       if Session.get('mode') == 'default'
@@ -9,7 +9,7 @@ Template['base-layout'].rendered = ->
       else
         Session.set 'mode', 'default'
 
-Template['base-layout'].onCreated ->
+Template.baseLayout.onCreated ->
   Meteor.call 'getGroups', (err, result) ->
     groups.set result
     visibleGroups.set result
@@ -17,7 +17,7 @@ Template['base-layout'].onCreated ->
 Template.groupSelector.helpers
   groups: -> groups.get()
   groupActive: -> 'active' if @ in visibleGroups.get()
-  glyphicon: -> if @ in visibleGroups.get() then 'eye-open' else 'eye-close'
+  glyphicon: -> if @ in visibleGroups.get() then 'ok' else 'minus'
 
 Template.groupSelector.events
   'click .toggleGroup': (e) ->
