@@ -11,3 +11,7 @@ Template['edit-http-service'].events
       Meteor.call 'updateHttpService', @service._id, jobData
     else
       Meteor.call 'addHttpService', jobData
+
+Template.httpServiceChecks.events
+  'change #checkType': (e) ->
+    console.log e.currentTarget.value
