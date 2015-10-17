@@ -7,3 +7,18 @@ ul.groupSelector > li > a > .glyphicon{
   margin-right:10px;
   font-size:80%;
 }
+
+.dropdown-menu.new-service-menu {
+  top: 20px;
+  left: 0px;
+}
+
+.dropdown-menu.new-service-menu {
+  top: 20px;
+  left: 0px;
+}
+
+.dropdown-menu.groupSelector {
+  top:20px;
+  left: -200px;
+}
