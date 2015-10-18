@@ -7,7 +7,9 @@ Meteor.startup ->
     @route 'service.http.create',
       template: 'edit-http-service'
       path: '/service/http/add'
-      data: -> action: 'create'
+      data: ->
+        service: {}
+        action: 'create'
     @route 'service.http.edit',
       template: 'edit-http-service'
       path: '/service/http/edit/:id'
