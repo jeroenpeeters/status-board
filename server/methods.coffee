@@ -1,7 +1,7 @@
 Meteor.methods
 
   getGroups: ->
-    Services.aggregate($group: _id: "$group").map (item) -> group: item._id
+    Services.aggregate($group: _id: "$info.group").map (item) -> group: item._id
 
   addHttpService: HttpStatusJob.create
   updateHttpService: HttpStatusJob.update

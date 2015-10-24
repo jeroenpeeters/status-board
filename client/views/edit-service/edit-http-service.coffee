@@ -26,11 +26,10 @@ Template['edit-http-service'].events
         check[inputItem.attr 'name'] = inputItem.val()
       jobData.checks.push check
 
-    console.log jobData
-    # if @service
-    #   Meteor.call 'updateHttpService', @service._id, jobData
-    # else
-    #   Meteor.call 'addService', jobData
+    if @service
+      Meteor.call 'updateHttpService', @service._id, jobData
+    else
+       Meteor.call 'addService', jobData
 
 Template.httpServiceChecks.helpers
   checks: -> checks.get()

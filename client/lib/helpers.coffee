@@ -2,7 +2,7 @@ Session.set 'mode', 'default' if not Session.get 'mode'
 @groups = new ReactiveVar null
 @visibleGroups = new ReactiveVar null
 
-@findServicesByGroup = -> Services.find {group: @group}, sort: name: 1
+@findServicesByGroup = -> Services.find {'info.group': @group}, sort: 'info.name': 1
 
 @WasDownInLastHour = (service) ->
   service.lastDownTime != undefined && moment().diff(service.lastDownTime, 'minutes') <= 60

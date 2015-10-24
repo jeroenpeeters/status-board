@@ -44,7 +44,7 @@ Meteor.startup ->
     console.log 'Looking for services to check'
     Services.find().fetch().forEach (service) ->
       if processors[service.type]
-        Cue.addTask service.type, {isAsync:true, unique:true}, service
+        #Cue.addTask service.type, {isAsync:true, unique:true}, service
       else
         console.error 'No processors for service', service
 
