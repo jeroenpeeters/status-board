@@ -7,16 +7,12 @@ Meteor.startup ->
     @route 'service.http.create',
       template: 'edit-http-service'
       path: '/service/http/add'
-      data: ->
-        service: {}
-        action: 'create'
     @route 'service.http.edit',
       template: 'edit-http-service'
       path: '/service/http/edit/:id'
-      subscriptions: -> Meteor.subscribe 'service', @params.id
+      waitOn: -> Meteor.subscribe 'service', @params.id
       data: ->
         service: Services.findOne _id: @params.id
-        action: 'edit'
 
     @route 'service.ssh.create',
       template: 'edit-ssh-service'
@@ -25,7 +21,6 @@ Meteor.startup ->
     @route 'service.ssh.edit',
       template: 'edit-ssh-service'
       path: '/service/ssh/edit/:id'
-      subscriptions: ->  Meteor.subscribe 'service', @params.id
+      waitOn: ->  Meteor.subscribe 'service', @params.id
       data: ->
         service: Services.findOne _id: @params.id
-        action: 'edit'
