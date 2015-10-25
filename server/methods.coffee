@@ -7,6 +7,6 @@ Meteor.methods
   updateHttpService: HttpStatusJob.update
   addSshService: SshJob.create
   updateSshService: SshJob.update
-  removeService: StatusJob.remove
+  removeService: (id) -> new StatusJob(id).remove()
   addService: (serviceDetails) ->
     Services.insert serviceDetails
