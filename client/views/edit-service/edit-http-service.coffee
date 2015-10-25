@@ -3,8 +3,12 @@ checksTemplate =
   statusCode: '200'
 checks = new ReactiveVar [checksTemplate]
 
-Template['edit-http-service'].helpers
+Template['edit-http-service'].onCreated ->
+  if _checks = Template.currentData()?.service?.checks
+    checks.set _checks
 
+Template['edit-http-service'].helpers
+  service: -> @service or {}
 
 Template['edit-http-service'].events
   'submit form': (e, tpl) ->
