@@ -27,8 +27,9 @@ class @StatusJob
     Services.update {_id: @jobData._id}, $set: status
     ServiceStatus.insert
       serviceId: @jobData._id
-      date: date
-      isUp: false
+      status:
+        date: date
+        isUp: false
     @callback()
 
   markAsCompleted: ->
@@ -38,6 +39,7 @@ class @StatusJob
     Services.update {_id: @jobData._id}, $set: status
     ServiceStatus.insert
       serviceId: @jobData._id
-      date: status['status.lastCheck']
-      isUp: true
+      status:
+        date: status['status.lastCheck']
+        isUp: true
     @callback()

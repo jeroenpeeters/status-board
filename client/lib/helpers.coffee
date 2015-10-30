@@ -5,9 +5,10 @@ Session.set 'mode', 'default' if not Session.get 'mode'
 @findServicesByGroup = -> Services.find {'info.group': @group}, sort: 'info.name': 1
 
 @WasDownInLastHour = (service) ->
-  service.lastDownTime != undefined && moment().diff(service.lastDownTime, 'minutes') <= 60
-@IsUp = (service) -> service.isUp
-@IsDown = (service) -> service.isUp == false and service.isUp != undefined
+  service.status != undefined && service.status.lastDownTime != undefined &&
+  moment().diff(service.status.lastDownTime, 'minutes') <= 60
+@IsUp = (service) -> service.status != undefined and service.status.isUp
+@IsDown = (service) -> service.status != undefined and service.status.isUp == false
 
 @StatusColorClass = (service) ->
   if IsUp(service) and WasDownInLastHour(service)

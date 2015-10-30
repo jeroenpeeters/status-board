@@ -21,24 +21,30 @@ class @HttpStatusJob extends StatusJob
       @retryJobOrFail()
 
     stream.on 'response', Meteor.bindEnvironment (response) =>
-      if response.statusCode >= 200 and response.statusCode < 300
-        if @jobData.regex
-          result = ""
-          response.on 'data', (data) -> result = result + data.toString()
-          response.on 'end', Meteor.bindEnvironment =>
-            if result.match new RegExp(job.data.regex, 'i')
-              @markAsCompleted()
-            else
-              @markAsFailed()
-        else
-          @markAsCompleted()
-      else
+      ctx = {}
+      ctx.statusCode = response.statusCode
+      ctx.result = ''
+      response.on 'data', (data) ->
+        ctx.result = ctx.result + data.toString()
+      response.on 'end', Meteor.bindEnvironment =>
+        @executeChecks ctx
+      response.on 'error',  Meteor.bindEnvironment =>
         @retryJobOrFail()
 
-  # executeChecks: (checks, response, body) ->
-  #   for check in checks
-  #     if not @[check.checkType](check, response, body) then
-  #       FailJob job, callback
-  #
-  # httpStatusCheck: (check, response) ->
-  #   "#{response.statusCode}" == "#{check.statusCode}"
+  executeChecks: (ctx) ->
+    for check in @jobData.checks
+      if not @[check.checkType](check, ctx)
+        console.log "#{check.checkType} failed!"
+        @markAsFailed()
+        return
+      else
+        console.log "#{check.checkType} success!"
+    @markAsCompleted()
+
+  httpStatusCheck: (check, ctx) ->
+    "#{ctx.statusCode}" == "#{check.statusCode}"
+
+  httpRegexCheck: (check, ctx) ->
+    if ctx.result
+      ctx.result.match new RegExp(check.regex, 'i')
+    else false

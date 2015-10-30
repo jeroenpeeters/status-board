@@ -38,4 +38,4 @@ Meteor.startup ->
         ]
       data: ->
         service: Services.findOne _id: @params.id
-        history: ServiceStatus.find {serviceId: @params.id}, sort: date: -1
+        history: ServiceStatus.find {serviceId: @params.id}, sort: 'status.date': -1
