@@ -1,49 +1,44 @@
 request = Meteor.npmRequire('hyperdirect')(10)
 
-@HttpStatusJob =
+@HttpStatusJobCrud = _.extend
   create: (jobData) ->
     Services.insert _.extend(jobData, {type: 'http'})
-
   update: (id, jobData) ->
     Services.update {_id: id}, $set: jobData
+, StatusJobCrud
 
-  job: (task, done) ->
-    #console.log task.jobName, task.data
-    @performCheck task, done, 0
 
-  performCheck: (job, callback, retryCount) ->
-    console.log 'check =>', job.data.url
-    stream = request job.data.url,
+class @HttpStatusJob extends StatusJob
+  constructor: (@jobData, @callback, @retryCount = 0) ->
+    console.log 'constructed HttpStatusJob', @
+    @performCheck()
+
+  performCheck: ->
+    stream = request @jobData.spec.url,
       timeout: 10000
 
     stream.on 'error', Meteor.bindEnvironment (err) =>
-      if retryCount > 2
-        console.log "HTTP.Error #{job.data.url} =>", err
-        FailJob job, callback
-      else
-        @retryJob job, callback, retryCount
+      @retryJobOrFail()
 
     stream.on 'response', Meteor.bindEnvironment (response) =>
       if response.statusCode >= 200 and response.statusCode < 300
-        if job.data.regex
+        if @jobData.regex
           result = ""
           response.on 'data', (data) -> result = result + data.toString()
           response.on 'end', Meteor.bindEnvironment =>
             if result.match new RegExp(job.data.regex, 'i')
-              CompleteJob job, callback
+              @markAsCompleted()
             else
-              FailJob job, callback
+              @markAsFailed()
         else
-          CompleteJob job, callback
+          @markAsCompleted()
       else
-        if retryCount > 2
-          console.log "HTTP.StatusCode err #{job.data.url} => #{response.statusCode}"
-          FailJob job, callback
-        else
-          @retryJob job, callback, retryCount
+        @retryJobOrFail()
 
-  retryJob: (job, callback, retryCount) ->
-    Meteor.setTimeout =>
-      console.log 'retrying job', job.data.url
-      @performCheck job, callback, retryCount+1
-    , 2000
+  # executeChecks: (checks, response, body) ->
+  #   for check in checks
+  #     if not @[check.checkType](check, response, body) then
+  #       FailJob job, callback
+  #
+  # httpStatusCheck: (check, response) ->
+  #   "#{response.statusCode}" == "#{check.statusCode}"
