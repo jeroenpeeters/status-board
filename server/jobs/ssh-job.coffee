@@ -1,5 +1,10 @@
 ssh2 = Meteor.npmRequire 'ssh2-connect'
 
+@SshJobCrud = _.extend
+  update: (id, jobData) ->
+    Services.update {_id: id}, $set: jobData
+, StatusJobCrud
+
 @SshJob =
   create: (name, group, serviceDetails) ->
     Services.insert _.extend({ name: name, type: 'ssh', group: group }, serviceDetails)
