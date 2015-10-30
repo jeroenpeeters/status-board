@@ -1,8 +1,3 @@
-@StatusJobCrud =
-  remove: (id) ->
-    Services.remove _id: @id, ->
-      ServiceStatus.remove serviceId: @id
-
 class @StatusJob
   _retryJob: ->
     Meteor.setTimeout =>
@@ -43,3 +38,15 @@ class @StatusJob
         date: status['status.lastCheck']
         isUp: true
     @callback()
+
+  executeChecks: (ctx) ->
+    for check in @jobData.checks
+      if not @[check.checkType]
+       console.warn "Check #{check.checkType} not implemented!"
+      else if not @[check.checkType](check, ctx)
+        console.log "Check #{check.checkType} failed!"
+        @markAsFailed()
+        return
+      else
+        console.log "Check #{check.checkType} success!"
+    @markAsCompleted()

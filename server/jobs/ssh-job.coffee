@@ -1,16 +1,6 @@
 ssh2 = Meteor.npmRequire 'ssh2-connect'
 
-@SshJobCrud = _.extend
-  update: (id, jobData) ->
-    Services.update {_id: id}, $set: jobData
-, StatusJobCrud
-
 @SshJob =
-  create: (name, group, serviceDetails) ->
-    Services.insert _.extend({ name: name, type: 'ssh', group: group }, serviceDetails)
-
-  update: (id, name, group, serviceDetails) ->
-    Services.update {_id: id}, _.extend({ name: name, type: 'ssh', group: group }, serviceDetails)
 
   job: (task, done) ->
     console.log task.jobName, task.data
@@ -37,9 +27,3 @@ ssh2 = Meteor.npmRequire 'ssh2-connect'
             CompleteJob job, callback
 
           session?.end()
-
-  retryJob: (job, callback, retryCount) ->
-    Meteor.setTimeout =>
-      console.log 'retrying ssh job'
-      @performCheck job, callback, retryCount+1
-    , 2000

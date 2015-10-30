@@ -10,7 +10,7 @@
   "license": "GPL-2.0",
   "dependencies": {
     "lodash": "^3.10.1",
-    "testx": "^1.4.9",
+    "testx": "^1.4.10",
     "testx-google-spreadsheet-runner": "^1.1.0",
     "testx-ictu-reporter": "^0.2.3"
   }

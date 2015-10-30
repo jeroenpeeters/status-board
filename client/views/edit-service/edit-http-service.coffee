@@ -31,9 +31,9 @@ Template['edit-http-service'].events
       jobData.checks.push check
 
     if @service
-      Meteor.call 'updateHttpService', @service._id, jobData
+      Meteor.call 'updateService', @service._id, jobData
     else
-       Meteor.call 'addService', jobData
+      Meteor.call 'addService', jobData
 
 Template.httpServiceChecks.helpers
   checks: -> checks.get()

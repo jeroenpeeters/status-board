@@ -29,7 +29,5 @@ Template['edit-ssh-service'].events
 
     if @service
       Meteor.call 'updateService', @service._id, jobData
-      #Meteor.call 'updateSshService', @service._id, e.target.serviceName.value, e.target.groupName.value, serviceDetails
     else
-       Meteor.call 'addService', jobData
-      #Meteor.call 'addSshService', e.target.serviceName.value, e.target.groupName.value, serviceDetails
+      Meteor.call 'addService', jobData
