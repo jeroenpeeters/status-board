@@ -6,6 +6,7 @@ Template['edit-ssh-service'].events
       port: e.target.port.value
       username: e.target.username.value
       cmd: e.target.cmd.value
+      regex: e.target.regex.value
 
     if e.target.password.value
       serviceDetails.password = e.target.password.value

@@ -7,9 +7,7 @@ request = Meteor.npmRequire('hyperdirect')(10)
   update: (id, jobData) ->
     Services.update {_id: id}, $set: jobData
 
-  job: (task, done) ->
-    #console.log task.jobName, task.data
-    @performCheck task, done, 0
+  job: (task, done) ->  @performCheck task, done, 0
 
   performCheck: (job, callback, retryCount) ->
     console.log 'check =>', job.data.url

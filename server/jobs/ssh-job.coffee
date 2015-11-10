@@ -7,9 +7,7 @@ ssh2 = Meteor.npmRequire 'ssh2-connect'
   update: (id, name, group, serviceDetails) ->
     Services.update {_id: id}, _.extend({ name: name, type: 'ssh', group: group }, serviceDetails)
 
-  job: (task, done) ->
-    console.log task.jobName, task.data
-    @performCheck task, done, 0
+  job: (task, done) -> @performCheck task, done, 0
 
   performCheck: (job, callback, retryCount) ->
     serviceDetails = _.extend {readyTimeout:2500}, job.data
@@ -21,17 +19,28 @@ ssh2 = Meteor.npmRequire 'ssh2-connect'
           session?.end()
         else SshJob.retryJob job, callback, retryCount
       else
-        session.exec serviceDetails.cmd, Meteor.bindEnvironment (err, result) ->
+        session.exec serviceDetails.cmd, Meteor.bindEnvironment (err, stream) ->
           if err
-            console.log err
+            console.error err
             if retryCount > 2
               FailJob job, callback
+              session?.end()
             else
               SshJob.retryJob job, callback, retryCount
           else
-            CompleteJob job, callback
-
-          session?.end()
+            if job.data.regex
+              result = ""
+              stream.on 'data', (data) ->
+                result = result + data.toString()
+              stream.on 'close', Meteor.bindEnvironment =>
+                if result.match new RegExp(job.data.regex, 'i')
+                  CompleteJob job, callback
+                else
+                  FailJob job, callback
+                session?.end()
+            else
+              CompleteJob job, callback
+              session?.end()
 
   retryJob: (job, callback, retryCount) ->
     Meteor.setTimeout =>
