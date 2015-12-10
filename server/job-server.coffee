@@ -8,6 +8,7 @@ Meteor.startup ->
   #
   jobFactory =
     http: (task, doneCallback) -> new HttpStatusJob task.data, doneCallback
+    ssh:  (task, doneCallback) -> new SshStatusJob task.data, doneCallback
 
   for type of jobFactory #when processors[p].job
     Cue.addJob "#{type}", {retryOnError:false, maxMs:30000}, jobFactory[type] #processors[p].job.bind(processors[p])

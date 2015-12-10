@@ -1,29 +1,19 @@
 ssh2 = Meteor.npmRequire 'ssh2-connect'
 
-@SshJob =
+class @SshStatusJob extends StatusJob
+  constructor: (@jobData, @callback, @retryCount = 0) ->
+    @performCheck()
 
-  job: (task, done) ->
-    console.log task.jobName, task.data
-    @performCheck task, done, 0
-
-  performCheck: (job, callback, retryCount) ->
-    serviceDetails = _.extend {readyTimeout:2500}, job.data
-    ssh2 serviceDetails, Meteor.bindEnvironment (err, session) ->
+  performCheck: ->
+    console.log 'ssh-perform', @jobData
+    serviceSpec = _.extend {readyTimeout:2500}, @jobData.spec
+    ssh2 serviceSpec, Meteor.bindEnvironment (err, session) =>
       if err
-        console.log err
-        if retryCount > 3
-          FailJob job, callback
-          session?.end()
-        else SshJob.retryJob job, callback, retryCount
+        @retryJobOrFail()
+        session?.end()
       else
-        session.exec serviceDetails.cmd, Meteor.bindEnvironment (err, result) ->
-          if err
-            console.log err
-            if retryCount > 2
-              FailJob job, callback
-            else
-              SshJob.retryJob job, callback, retryCount
+        session.exec serviceSpec.cmd, Meteor.bindEnvironment (err, result) =>
+          if err then @retryJobOrFail()
           else
-            CompleteJob job, callback
-
+            @markAsCompleted()
           session?.end()
