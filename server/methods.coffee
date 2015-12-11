@@ -9,4 +9,5 @@ Meteor.methods
   updateService: (id, serviceDetails) ->
     Services.update {_id: id}, $set: serviceDetails
   addService: (serviceDetails) ->
+    console.log 'addService', serviceDetails
     Services.insert serviceDetails

@@ -5,6 +5,7 @@ class @HttpStatusJob extends StatusJob
     @performCheck()
 
   performCheck: ->
+    console.log 'http', @jobData
     stream = request @jobData.spec.url,
       timeout: 10000
 
