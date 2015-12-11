@@ -2,15 +2,11 @@
 
 Meteor.startup ->
 
-  # processors =
-  #   http: HttpStatusJob
-  #   ssh: SshJob
-  #
   jobFactory =
     http: (task, doneCallback) -> new HttpStatusJob task.data, doneCallback
     ssh:  (task, doneCallback) -> new SshStatusJob task.data, doneCallback
 
-  for type of jobFactory #when processors[p].job
+  for type of jobFactory 
     Cue.addJob "#{type}", {retryOnError:false, maxMs:30000}, jobFactory[type] #processors[p].job.bind(processors[p])
 
   Cue.maxTasksAtOnce = 8
