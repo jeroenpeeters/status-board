@@ -7,6 +7,10 @@ Template['edit-http-service'].onCreated ->
   if _checks = Template.currentData()?.service?.checks
     checks.set _checks
 
+Template['edit-http-service'].onRendered ->
+  $('#tags').tagsinput()
+  $('.bootstrap-tagsinput').addClass 'form-control'
+
 Template['edit-http-service'].helpers
   service: -> @service or {}
 
@@ -18,8 +22,11 @@ Template['edit-http-service'].events
       info:
         name: e.target.serviceName.value
         group: e.target.groupName.value
+        tags: e.target.tags.value.split ',' 
       spec: url: e.target.url.value
       checks: []
+
+    console.log jobData
 
     tpl.$('.statusCheck').each (index, node) ->
       item = tpl.$ node

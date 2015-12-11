@@ -14,5 +14,8 @@ Template.tables.helpers
   lastCheckHuman: -> moment(@lastCheck).fromNow()
   statusGlyphicon: -> if IsUp(@)  then 'ok-sign' else 'exclamation-sign'
   statusGlyphColor: -> if IsUp(@) then '#2ECC40' else '#FF4136'
-  statusClass: -> StatusColorClass @#if IsUp(@)  then 'success' else 'danger'
+  statusClass: ->
+    mins = "#{@status.lastCheck.getMinutes()}"
+    num = if mins.length > 1 then mins[1] else mins
+    "#{StatusColorClass @} min-#{num}" #if IsUp(@)  then 'success' else 'danger'
   editRoute: -> "service.#{@type}.edit"
