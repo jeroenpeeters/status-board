@@ -1,13 +1,13 @@
 Template.tables.onRendered ->
   Meteor.setTimeout ->
-    $('.masonry-grid').isotope
-      itemSelector: 'table',
-        masonry:
-          columnWidth: 300
-          gutter: 5
+    $(".gridster").gridster
+      widget_margins: [5, 5]
+      widget_base_dimensions: [300, 38]
+      widget_selector: 'table'
   , 500
 
 Template.tables.helpers
+  sizey: ->findServicesByGroup.bind(@)().count() + 1
   isDefaultMode: -> Session.get('mode') == 'default'
   groups: -> visibleGroups.get()
   services: findServicesByGroup
