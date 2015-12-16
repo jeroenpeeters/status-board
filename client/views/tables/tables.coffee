@@ -2,8 +2,16 @@ Template.tables.onRendered ->
   Meteor.setTimeout ->
     $(".gridster").gridster
       widget_margins: [5, 5]
-      widget_base_dimensions: [300, 38]
+      widget_base_dimensions: [50, 30]
       widget_selector: 'table'
+      resize: enabled: true
+      helper: 'clone'
+      draggable: stop: (event, ui) ->
+        console.log @serialize()
+      # resize:
+      #   stop: (event, ui) ->
+      #     console.log @serialize()
+      #   handle_append_to: false
   , 500
 
 Template.tables.helpers

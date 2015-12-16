@@ -1,7 +1,7 @@
 <template name="tables">
   <div class="gridster">
     {{#each groups}}
-    <table data-row="1" data-col="1" data-sizex="1" data-sizey="{{sizey}}" class="table table-hover" style="width:300px;">
+    <table data-row="1" data-col="1" data-sizex="4" data-sizey="{{sizey}}" class="table table-hover">
       <thead>
         <tr>
           <th colspan="2" style="font-size:150%">{{group}}</th>
@@ -11,15 +11,15 @@
       <tbody>
       {{#each services}}
         <tr class="{{statusClass}}">
-          <td style="width:50px; text-align:center;">
+          <td style="text-align:center;vertical-align: middle;">
             <span class="glyphicon glyphicon-{{statusGlyphicon}}" style="color:{{statusGlyphColor}}" aria-hidden="true"></span>
           </td>
-          <td>
+          <td style="vertical-align: middle;">
             <a class="serviceDetailsLink" href="{{pathFor route='service.details' id=_id}}">
               {{info.name}}
             </a>
           </td>
-          <td>
+          <td style="vertical-align: middle;">
             {{#if isDefaultMode}}
             <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
             {{/if}}
