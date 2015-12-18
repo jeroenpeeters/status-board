@@ -1,7 +1,7 @@
 <template name="tables">
   <div class="gridster">
     {{#each groups}}
-    <table data-row="1" data-col="1" data-sizex="4" data-sizey="{{sizey}}" class="table table-hover">
+    <table id="{{group}}" data-row="{{row}}" data-col="{{col}}" data-sizex="{{sizex}}" data-sizey="{{sizey}}" class="table table-hover">
       <thead>
         <tr>
           <th colspan="2" style="font-size:150%">{{group}}</th>

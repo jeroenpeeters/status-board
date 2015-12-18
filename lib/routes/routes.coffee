@@ -6,33 +6,33 @@ Meteor.startup ->
   Router.map ->
     @route 'index',
       path: '/'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
     @route 'sunburst',
       path: '/view/sunburst'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
     @route 'tiles',
       path: '/view/tiles'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
     @route 'tables',
       path: '/view/tables'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
     @route 'grid',
       path: '/view/grid'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
     @route 'service.details',
       template: 'service.details'
       path: '/service/details/:id'
-      subscriptions: -> [
+      waitOn: -> [
           Meteor.subscribe 'service', @params.id
           Meteor.subscribe 'service/status', {serviceId: @params.id}
         ]

@@ -1,21 +1,37 @@
 Template.tables.onRendered ->
-  Meteor.setTimeout ->
-    $(".gridster").gridster
-      widget_margins: [5, 5]
-      widget_base_dimensions: [50, 30]
-      widget_selector: 'table'
-      resize: enabled: true
-      helper: 'clone'
-      draggable: stop: (event, ui) ->
-        console.log @serialize()
-      # resize:
-      #   stop: (event, ui) ->
-      #     console.log @serialize()
-      #   handle_append_to: false
-  , 500
+  console.log 'serial -> ', Session.get 'serial'
+  $(".gridster").gridster
+    widget_margins: [5, 5]
+    widget_base_dimensions: [50, 30]
+    widget_selector: 'table'
+    helper: 'clone'
+    draggable:
+      stop: (event, ui) ->
+        Session.set 'serial', @serialize()
+    resize:
+      enabled: true
+      stop: (event, ui) ->
+        Session.set 'serial', @serialize()
+    serialize_params: (widget, wgd) ->
+      id: widget.attr('id')
+      col: wgd.col
+      row: wgd.row
+      size_x: wgd.size_x
+      size_y: wgd.size_y
+
+getPersistedSettingForGroup = (group, setting, functionToGetDefault) ->
+  if Session.get 'serial'
+    console.log group
+    if item = Session.get('serial').filter((item) => item.id == group)[0]
+      return item[setting]
+  functionToGetDefault()
 
 Template.tables.helpers
-  sizey: ->findServicesByGroup.bind(@)().count() + 1
+  sizey: -> getPersistedSettingForGroup @group, 'size_y', ->
+    findServicesByGroup.bind(@)().count() + 1
+  sizex: -> getPersistedSettingForGroup @group, 'size_x', -> 4
+  col: -> getPersistedSettingForGroup @group, 'col', -> 1
+  row: -> getPersistedSettingForGroup @group, 'row', -> 1
   isDefaultMode: -> Session.get('mode') == 'default'
   groups: -> visibleGroups.get()
   services: findServicesByGroup
