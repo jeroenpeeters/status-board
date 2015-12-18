@@ -27,7 +27,7 @@ getPersistedSettingForGroup = (group, setting, functionToGetDefault) ->
   functionToGetDefault()
 
 Template.tables.helpers
-  sizey: -> getPersistedSettingForGroup @group, 'size_y', ->
+  sizey: -> getPersistedSettingForGroup @group, 'size_y', =>
     findServicesByGroup.bind(@)().count() + 1
   sizex: -> getPersistedSettingForGroup @group, 'size_x', -> 4
   col: -> getPersistedSettingForGroup @group, 'col', -> 1
