@@ -48,6 +48,6 @@ Meteor.startup ->
       else
         console.error 'No processors for service', service
 
-  Meteor.setInterval scheduleChecks, 60000
+  Meteor.setInterval scheduleChecks, 10000
 
   scheduleChecks() # perform initial checks
