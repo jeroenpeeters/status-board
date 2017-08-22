@@ -2,6 +2,7 @@ checksTemplate =
   checkType: 'httpStatusCheck'
   statusCode: '200'
 checks = new ReactiveVar [checksTemplate]
+dataRetrieval = new ReactiveVar []
 
 Template['edit-http-service'].onCreated ->
   if _checks = Template.currentData()?.service?.checks
@@ -22,8 +23,10 @@ Template['edit-http-service'].events
       info:
         name: e.target.serviceName.value
         group: e.target.groupName.value
-        tags: e.target.tags.value.split ',' 
-      spec: url: e.target.url.value
+        tags: e.target.tags.value.split ','
+      spec:
+        url: e.target.url.value
+        basicAuth: e.target.basicAuth.value
       checks: []
 
     console.log jobData
@@ -51,3 +54,12 @@ Template.httpServiceChecks.events
     _checks = checks.get()
     _checks.push checkType: checkType
     checks.set _checks
+
+Template.dataRetrieval.helpers
+  dataRetrieval: -> dataRetrieval.get()
+
+Template.dataRetrieval.events
+  'click a': (e) ->
+    _dataRetrieval = dataRetrieval.get()
+    _dataRetrieval.push type: $(e.currentTarget).data 'type'
+    dataRetrieval.set _dataRetrieval

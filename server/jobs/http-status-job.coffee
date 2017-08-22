@@ -8,6 +8,7 @@ class @HttpStatusJob extends StatusJob
     console.log 'http', @jobData
     stream = request @jobData.spec.url,
       timeout: 10000
+      auth: @jobData.spec.basicAuth
 
     stream.on 'error', Meteor.bindEnvironment (err) =>
       @retryJobOrFail()
@@ -26,7 +27,12 @@ class @HttpStatusJob extends StatusJob
   httpStatusCheck: (check, ctx) ->
     "#{ctx.statusCode}" == "#{check.statusCode}"
 
-  httpRegexCheck: (check, ctx) ->
+  httpRegexCheck: (check, ctx, storeProp) ->
     if ctx.result
-      ctx.result.match new RegExp(check.regex, 'i')
-    else false
+      regexp = new RegExp(check.regex, 'i')
+      match = regexp.exec ctx.result
+      if match
+        if check.name and value = match[1]
+          storeProp check.name, value
+        return true
+    return false

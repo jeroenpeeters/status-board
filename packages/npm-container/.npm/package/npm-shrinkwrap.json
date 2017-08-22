@@ -3,83 +3,83 @@
     "hyperdirect": {
       "version": "0.0.0",
       "resolved": "https://registry.npmjs.org/hyperdirect/-/hyperdirect-0.0.0.tgz",
-      "from": "hyperdirect@0.0.0",
+      "from": "https://registry.npmjs.org/hyperdirect/-/hyperdirect-0.0.0.tgz",
       "dependencies": {
         "hyperquest": {
           "version": "0.1.8",
           "resolved": "https://registry.npmjs.org/hyperquest/-/hyperquest-0.1.8.tgz",
-          "from": "hyperquest@>=0.1.5 <0.2.0",
+          "from": "https://registry.npmjs.org/hyperquest/-/hyperquest-0.1.8.tgz",
           "dependencies": {
             "duplexer": {
               "version": "0.1.1",
               "resolved": "https://registry.npmjs.org/duplexer/-/duplexer-0.1.1.tgz",
-              "from": "duplexer@>=0.1.0 <0.2.0"
+              "from": "https://registry.npmjs.org/duplexer/-/duplexer-0.1.1.tgz"
             },
             "through": {
               "version": "2.2.7",
               "resolved": "https://registry.npmjs.org/through/-/through-2.2.7.tgz",
-              "from": "through@>=2.2.0 <2.3.0"
+              "from": "https://registry.npmjs.org/through/-/through-2.2.7.tgz"
             }
           }
         },
         "through": {
           "version": "2.3.8",
           "resolved": "https://registry.npmjs.org/through/-/through-2.3.8.tgz",
-          "from": "through@>=2.3.4 <2.4.0"
+          "from": "https://registry.npmjs.org/through/-/through-2.3.8.tgz"
         }
       }
     },
     "ssh2-connect": {
       "version": "0.0.6",
       "resolved": "https://registry.npmjs.org/ssh2-connect/-/ssh2-connect-0.0.6.tgz",
-      "from": "ssh2-connect@0.0.6",
+      "from": "https://registry.npmjs.org/ssh2-connect/-/ssh2-connect-0.0.6.tgz",
       "dependencies": {
         "ssh2": {
           "version": "0.4.15",
           "resolved": "https://registry.npmjs.org/ssh2/-/ssh2-0.4.15.tgz",
-          "from": "ssh2@>=0.4.4 <0.5.0",
+          "from": "https://registry.npmjs.org/ssh2/-/ssh2-0.4.15.tgz",
           "dependencies": {
             "readable-stream": {
               "version": "1.0.34",
               "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.0.34.tgz",
-              "from": "readable-stream@>=1.0.0 <1.1.0",
+              "from": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.0.34.tgz",
               "dependencies": {
                 "core-util-is": {
                   "version": "1.0.2",
                   "resolved": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz",
-                  "from": "core-util-is@>=1.0.0 <1.1.0"
+                  "from": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz"
                 },
                 "inherits": {
                   "version": "2.0.1",
                   "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz",
-                  "from": "inherits@>=2.0.1 <2.1.0"
+                  "from": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
                 },
                 "isarray": {
                   "version": "0.0.1",
                   "resolved": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz",
-                  "from": "isarray@0.0.1"
+                  "from": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
                 },
                 "string_decoder": {
                   "version": "0.10.31",
                   "resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz",
-                  "from": "string_decoder@>=0.10.0 <0.11.0"
+                  "from": "https://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz"
                 }
               }
             },
             "ssh2-streams": {
               "version": "0.0.23",
               "resolved": "https://registry.npmjs.org/ssh2-streams/-/ssh2-streams-0.0.23.tgz",
-              "from": "ssh2-streams@>=0.0.22 <0.1.0",
+              "from": "https://registry.npmjs.org/ssh2-streams/-/ssh2-streams-0.0.23.tgz",
               "dependencies": {
                 "asn1": {
                   "version": "0.2.3",
                   "resolved": "https://registry.npmjs.org/asn1/-/asn1-0.2.3.tgz",
-                  "from": "asn1@>=0.2.0 <0.3.0"
+                  "from": "https://registry.npmjs.org/asn1/-/asn1-0.2.3.tgz"
                 },
                 "streamsearch": {
                   "version": "0.1.2",
                   "resolved": "https://registry.npmjs.org/streamsearch/-/streamsearch-0.1.2.tgz",
-                  "from": "streamsearch@>=0.1.2 <0.2.0"
+                  "from": "https://registry.npmjs.org/streamsearch/-/streamsearch-0.1.2.tgz"
                 }
               }
             }

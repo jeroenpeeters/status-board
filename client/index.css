@@ -37,7 +37,7 @@ html, body {
     opacity: .75;
 }
 a.editServiceAction {
-  padding-right:5px;
+  padding-top:5px;
   color:grey;
 }
 a.editServiceAction:hover {

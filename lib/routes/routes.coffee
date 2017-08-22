@@ -9,26 +9,44 @@ Meteor.startup ->
       waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'sunburst',
       path: '/view/sunburst'
       waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'tiles',
       path: '/view/tiles'
       waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
+    @route 'tilesViewOnly',
+      template: 'tiles'
+      path: '/view/tiles/viewOnly'
+      waitOn: -> [
+        Meteor.subscribe 'services'
+      ]
+      data: ->
+        viewOnly: true
     @route 'tables',
       path: '/view/tables'
       waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'grid',
       path: '/view/grid'
       waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'service.details',
       template: 'service.details'
       path: '/service/details/:id'
@@ -39,3 +57,4 @@ Meteor.startup ->
       data: ->
         service: Services.findOne _id: @params.id
         history: ServiceStatus.find {serviceId: @params.id}, sort: 'status.date': -1
+        viewOnly: false
