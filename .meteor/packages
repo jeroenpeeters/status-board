@@ -4,6 +4,7 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
+meteor-platform
 coffeescript
 vsivsi:job-collection
 http
@@ -28,16 +29,3 @@ frabrunelle:fittext
 isotope:isotope
 arunoda:streams
 random
-standard-minifiers
-meteor-base
-mobile-experience
-mongo
-blaze-html-templates
-session
-jquery
-tracker
-logging
-reload
-ejson
-spacebars
-check

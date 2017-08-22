@@ -1,5 +1,4 @@
 {
   "ssh2-connect": "0.0.6",
-  "hyperdirect": "0.0.0",
-  "socket.io": "1.4.5"
+  "hyperdirect": "0.0.0"
 }
