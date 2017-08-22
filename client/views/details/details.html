@@ -1,6 +1,6 @@
 <template name="service.details">
   {{#with service}}
-  <h1>{{group}} &raquo; {{name}}</h1>
+  <h1>{{info.group}} &raquo; {{info.name}}</h1>
   <table class="table">
     <tbody>
       <tr>
@@ -9,12 +9,12 @@
       </tr>
       <tr>
         <th scope="row">Checked on</th>
-        <td>{{lastCheck}} - {{lastCheckFromNow}}</td>
+        <td>{{status.lastCheck}} - {{lastCheckFromNow}}</td>
       </tr>
       <tr>
         <th scope="row">Last down on</th>
-        {{#if lastDownTime}}
-        <td>{{lastDownTime}} - {{lastDownTimeFromNow}}</td>
+        {{#if status.lastDownTime}}
+        <td>{{status.lastDownTime}} - {{lastDownTimeFromNow}}</td>
         {{else}}
         <td>never</td>
         {{/if}}

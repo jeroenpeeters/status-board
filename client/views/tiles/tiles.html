@@ -4,15 +4,16 @@
     {{#each services}}
     <div class="dash-tiles ">
         <div class="dash-tile {{statusClass}} clearfix">
-            <div class="dash-tile-header">
+            {{#if isAdmin ../..}}
               <a style="float:right" href="{{pathFor route=editRoute id=_id}}" class="editServiceAction"><i class="fa fa-edit"></i></a>
-            </div>
-            <!--div class="dash-tile-icon"><i class="fa fa-users"></i></div-->
-            {{!--
-            <div class="dash-tile-timestamp">checked: {{lastCheckHuman}}</div>
-            --}}
+            {{/if}}
             <div class="dash-tile-text">
-                {{name}}
+                {{info.name}} <br/>
+                <div style="font-size:24px; margin-top:10px;">
+                  {{#each properties}}
+                    {{name}}: {{value}}<br/>
+                  {{/each}}
+                </div>
             </div>
             <div class="dash-tile-status">
 

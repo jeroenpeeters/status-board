@@ -37,7 +37,7 @@ html, body {
     opacity: .75;
 }
 a.editServiceAction {
-  padding-right:5px;
+  padding-top:5px;
   color:grey;
 }
 a.editServiceAction:hover {
@@ -116,6 +116,32 @@ h3.group-name {
   background-color: #dff0d8;
   border-bottom: 1px solid #2ECC40;
 }
+
+.table > tbody > tr.status-up.min-1,
+.table > tbody > tr.status-up.min-3,
+.table > tbody > tr.status-up.min-5,
+.table > tbody > tr.status-up.min-7,
+.table > tbody > tr.status-up.min-9 {
+
+  -webkit-animation-direction: normal;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-name: upnow !important;
+  -webkit-animation-timing-function: ease;
+}
+.table > tbody > tr.status-up.min-0,
+.table > tbody > tr.status-up.min-2,
+.table > tbody > tr.status-up.min-4,
+.table > tbody > tr.status-up.min-6,
+.table > tbody > tr.status-up.min-8 {
+
+  -webkit-animation-direction: normal;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-name: upnowt !important;
+  -webkit-animation-timing-function: ease;
+}
+
 .table > tbody > tr.status-down {
   background-color: #f2dede;
   border-bottom: 1px solid #FF4136;
@@ -148,17 +174,13 @@ a.serviceDetailsLink {
   100% { background: rgb(153,0,0); color:white; }
 }
 
-.table > tbody > tr.upNow {
-  -webkit-animation-direction: normal;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: 1;
-  -webkit-animation-name: upnow;
-  -webkit-animation-timing-function: ease;
-}
-
 @-webkit-keyframes upnow {
-  0% { background: green; color:black;}
-  100% { background: #2ECC40; color:black; }
+  0% { background: #99CB84; color:black;}
+  100% { background: #dff0d8; color:black; }
+}
+@-webkit-keyframes upnowt {
+  0% { background: #99CB84; color:black;}
+  100% { background: #dff0d8; color:black; }
 }
 
 .indexPage {

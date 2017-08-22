@@ -6,36 +6,55 @@ Meteor.startup ->
   Router.map ->
     @route 'index',
       path: '/'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'sunburst',
       path: '/view/sunburst'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'tiles',
       path: '/view/tiles'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
+    @route 'tilesViewOnly',
+      template: 'tiles'
+      path: '/view/tiles/viewOnly'
+      waitOn: -> [
+        Meteor.subscribe 'services'
+      ]
+      data: ->
+        viewOnly: true
     @route 'tables',
       path: '/view/tables'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'grid',
       path: '/view/grid'
-      subscriptions: -> [
+      waitOn: -> [
         Meteor.subscribe 'services'
       ]
+      data: ->
+        viewOnly: false
     @route 'service.details',
       template: 'service.details'
       path: '/service/details/:id'
-      subscriptions: -> [
+      waitOn: -> [
           Meteor.subscribe 'service', @params.id
           Meteor.subscribe 'service/status', {serviceId: @params.id}
         ]
       data: ->
         service: Services.findOne _id: @params.id
-        history: ServiceStatus.find {serviceId: @params.id}, sort: date: -1
+        history: ServiceStatus.find {serviceId: @params.id}, sort: 'status.date': -1
+        viewOnly: false

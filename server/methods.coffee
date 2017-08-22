@@ -1,10 +1,13 @@
 Meteor.methods
 
   getGroups: ->
-    Services.aggregate($group: _id: "$group").map (item) -> group: item._id
+    Services.aggregate($group: _id: "$info.group").map (item) -> group: item._id
 
-  addHttpService: HttpStatusJob.create
-  updateHttpService: HttpStatusJob.update
-  addSshService: SshJob.create
-  updateSshService: SshJob.update
-  removeService: StatusJob.remove
+  removeService: (id) ->
+    Services.remove _id: id, ->
+      ServiceStatus.remove serviceId: id
+  updateService: (id, serviceDetails) ->
+    Services.update {_id: id}, $set: serviceDetails
+  addService: (serviceDetails) ->
+    console.log 'addService', serviceDetails
+    Services.insert serviceDetails

@@ -1,47 +1,38 @@
 request = Meteor.npmRequire('hyperdirect')(10)
 
-@HttpStatusJob =
-  create: (jobData) ->
-    Services.insert _.extend(jobData, {type: 'http'})
+class @HttpStatusJob extends StatusJob
+  constructor: (@jobData, @callback, @retryCount = 0) ->
+    @performCheck()
 
-  update: (id, jobData) ->
-    Services.update {_id: id}, $set: jobData
-
-  job: (task, done) ->  @performCheck task, done, 0
-
-  performCheck: (job, callback, retryCount) ->
-    console.log 'check =>', job.data.url
-    stream = request job.data.url,
+  performCheck: ->
+    console.log 'http', @jobData
+    stream = request @jobData.spec.url,
       timeout: 10000
+      auth: @jobData.spec.basicAuth
 
     stream.on 'error', Meteor.bindEnvironment (err) =>
-      if retryCount > 2
-        console.log "HTTP.Error #{job.data.url} =>", err
-        FailJob job, callback
-      else
-        @retryJob job, callback, retryCount
+      @retryJobOrFail()
 
     stream.on 'response', Meteor.bindEnvironment (response) =>
-      if response.statusCode >= 200 and response.statusCode < 300
-        if job.data.regex
-          result = ""
-          response.on 'data', (data) -> result = result + data.toString()
-          response.on 'end', Meteor.bindEnvironment =>
-            if result.match new RegExp(job.data.regex, 'i')
-              CompleteJob job, callback
-            else
-              FailJob job, callback
-        else
-          CompleteJob job, callback
-      else
-        if retryCount > 2
-          console.log "HTTP.StatusCode err #{job.data.url} => #{response.statusCode}"
-          FailJob job, callback
-        else
-          @retryJob job, callback, retryCount
+      ctx = {}
+      ctx.statusCode = response.statusCode
+      ctx.result = ''
+      response.on 'data', (data) ->
+        ctx.result = ctx.result + data.toString()
+      response.on 'end', Meteor.bindEnvironment =>
+        @executeChecks ctx
+      response.on 'error',  Meteor.bindEnvironment =>
+        @retryJobOrFail()
 
-  retryJob: (job, callback, retryCount) ->
-    Meteor.setTimeout =>
-      console.log 'retrying job', job.data.url
-      @performCheck job, callback, retryCount+1
-    , 2000
+  httpStatusCheck: (check, ctx) ->
+    "#{ctx.statusCode}" == "#{check.statusCode}"
+
+  httpRegexCheck: (check, ctx, storeProp) ->
+    if ctx.result
+      regexp = new RegExp(check.regex, 'i')
+      match = regexp.exec ctx.result
+      if match
+        if check.name and value = match[1]
+          storeProp check.name, value
+        return true
+    return false

@@ -4,7 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 coffeescript
 vsivsi:job-collection
 http
@@ -14,7 +13,6 @@ momentjs:moment
 meteorhacks:npm
 
 
-npm-container
 iron:router
 zimme:active-route
 lookback:tooltips
@@ -29,3 +27,23 @@ frabrunelle:fittext
 isotope:isotope
 arunoda:streams
 random
+ajduke:bootstrap-tagsinput
+percolate:migrations
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+tracker
+logging
+reload
+ejson
+spacebars
+check
+standard-minifier-css
+standard-minifier-js
+matteodem:gridster
+
+
+npm-container
+jquery

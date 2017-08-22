@@ -1,0 +1,17 @@
+{
+  "name": "status-board-tests",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeroen Peeters <jeroen@peetersweb.nl> (http://jeroenpeeters.nl)",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "testx": "^1.4.10",
+    "testx-google-spreadsheet-runner": "^1.1.0",
+    "testx-ictu-reporter": "^0.2.3"
+  }
+}

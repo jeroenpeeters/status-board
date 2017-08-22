@@ -1,29 +1,123 @@
 <template name="edit-http-service">
     <form class="form-horizontal">
-        <div class="form-group">
-            <label for="serviceName" class="col-sm-2 control-label">Service name</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="serviceName" placeholder="Google" value={{service.name}}>
+      {{#with service}}
+      <div class="panel panel-primary">
+          <div class="panel-heading">Service Info</div>
+          <div class="panel-body">
+            <div class="form-group">
+                <label for="serviceName" class="col-sm-2 control-label">Service name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="serviceName" placeholder="Google" value={{info.name}}>
+                </div>
             </div>
+            <div class="form-group">
+                <label for="groupName" class="col-sm-2 control-label">Service group</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="groupName" placeholder="" value={{info.group}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="groupName" class="col-sm-2 control-label">Service tags</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="tags" placeholder="" value={{info.tags}}>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">HTTP Service</div>
+          <div class="panel-body">
+            <div class="form-group">
+                <label for="url" class="col-sm-2 control-label">HTTP URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="url" placeholder="http://www.google.com" value={{spec.url}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="col-sm-2 control-label">Basic Authentication</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="basicAuth" placeholder="username:password" value={{spec.basicAuth}}>
+                </div>
+            </div>
+          </div>
         </div>
         <div class="form-group">
-            <label for="groupName" class="col-sm-2 control-label">Service group</label>
+            <label for="url" class="col-sm-2 control-label">Checks</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="groupName" placeholder="" value={{service.group}}>
+                {{> httpServiceChecks}}
             </div>
         </div>
-        <div class="form-group">
-            <label for="url" class="col-sm-2 control-label">HTTP URL</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="url" placeholder="http://www.google.com" value={{service.url}}>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="url" class="col-sm-2 control-label">Regex to match against the response</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="regex" placeholder="body" value={{service.regex}}>
-            </div>
-        </div>
+        {{/with}}
         {{> submitButtons}}
     </form>
+</template>
+
+<template name="httpServiceChecks">
+  <div class="form-group">
+      <div class="col-sm-12">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Add a service check <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a data-check-type="httpStatusCheck" href="#">Status Check - checks the HTTP status code</a></li>
+            <li><a data-check-type="httpRegexCheck" href="#">HTML Regex - checks if a regular expression matches againts the HTML</a></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  {{#each checks}}
+  <div class="statusCheck" data-check-type="{{checkType}}">
+  {{> Template.dynamic template=checkType}}
+  </div>
+  {{/each}}
+</template>
+
+<template name="httpStatusCheck">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">HTTP Status</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="url" class="col-sm-1 control-label">Status Code</label>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" name="statusCode" placeholder="200" value={{statusCode}}>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="httpRegexCheck">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Regular Expression</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">Name <small>(optional)</small></label>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" name="name" placeholder="" value={{name}}>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="url" class="col-sm-1 control-label">Regex</label>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" name="regex" placeholder="[A-Z0-9]{10}" value={{regex}}>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="httpRegex">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Regular Expression2</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="url" class="col-sm-1 control-label">Regex</label>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" name="regex" placeholder="body" value={{regex}}>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

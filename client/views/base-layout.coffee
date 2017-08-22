@@ -1,5 +1,7 @@
 Template.baseLayout.helpers
-  isDefaultMode: -> Session.get('mode') == 'default'
+  isDefaultMode: ->
+    console.log @
+    @viewOnly is false and Session.get('mode') == 'default'
 
 Template.baseLayout.rendered = ->
   $('body').on 'keydown', (e) ->
